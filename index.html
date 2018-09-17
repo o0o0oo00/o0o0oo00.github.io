@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next pisces use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/goodicon.png?v=5.1.4">
 
 
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -189,6 +189,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -236,7 +246,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/goodicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,6 +294,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -302,91 +341,17 @@
       
         
           
-            <ol>
-<li>函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式</li>
-<li>如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，               <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var name: String = &quot;&quot;</span><br><span class="line">        get() = field.toUpperCase()</span><br><span class="line">        set(value)&#123;</span><br><span class="line">            field = &quot;Name: $value&quot;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>那么既然直接使用点来代替setter方法，那么需要访问属性的时候需要使用，filed来作为属性本来的值。</p>
-<p>覆盖方法总是使用与基类型相同的默认值</p>
-<p>调用混位置参数时候，命名参数要放在默认位置参数之后，例如：允许：（1，x = 1）不允许 （x = 1 , 1）  </p>
-<p>单个表达式函数，可以省略花括号，直接在等号后面接表达式，作为函数体，当返回值类型编译器可以推断出来的时候，可以不同指定函数的返回值类型  </p>
-<p>具有代码块的函数需要显示的指定返回值类型， </p>
-<p>可变数量的参数Varargs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fun &lt;T&gt; asList(vararg ts:T): List&lt;T&gt; &#123;</span><br><span class="line">    val result = ArrayList&lt;T&gt;()</span><br><span class="line">    for(t in ts)//ts is an array</span><br><span class="line">        result.add(t)</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) &#123;</span><br><span class="line">    Toast.makeText(this, message, duration).show()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>扩展了Context，直接使用this，来代表context的实例</p>
-<p><strong> 映射对象到变量中</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val f1 = Forecast(Date(), 27.5f, &quot;Shiny day&quot;)</span><br><span class="line">val (date, temperature, details) = f1</span><br><span class="line"></span><br><span class="line">for ((key, value) in map) &#123;</span><br><span class="line">    Log.d(&quot;map&quot;, &quot;key:$key, value:$value&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="扩展函数-1"><a href="#扩展函数-1" class="headerlink" title="扩展函数"></a>扩展函数</h3><p>扩展函数是指在一个类上面增加一种新的行为，它就表现的像是属于这个类一样，而且可以使用this关键字调用类的所有public方法.它可以被任何类和类的扩展子类调用。  </p>
-<p>扩展函数是静态解析的，即使是在运行时参数传入其他类型，得出的结果仍然是声明时候的参数类型<br><strong>扩展函数中的操作符</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">operator fun ViewGroup.get(position: Int): View = getChildAt(position)  </span><br><span class="line"></span><br><span class="line">val container: ViewGroup = find(R.id.container)</span><br><span class="line">val view = container[2]</span><br></pre></td></tr></table></figure></p>
-<h3 id="Lambdas"><a href="#Lambdas" class="headerlink" title="Lambdas"></a>Lambdas</h3><p>定义一个匿名函数，<br>在箭头的左边指定参数，在箭头的右边返回函数执行的结果。<br>一直简写，可以写成这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123; toast(&quot;Click&quot;) &#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fun main(args: Array&lt;String&gt;) &#123;</span><br><span class="line">   val result = &#123;msg : String -&gt; print(msg)&#125;</span><br><span class="line">   result(&quot;hello&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>语法糖</strong>   </p>
-<ul>
-<li>当参数只有一个的时候，声明中可以不用显示的声明参数，在使用参数的时候可以使用it来代替这个唯一的参数</li>
-<li>当有多个参数用户到的时候，可以使用下划线来代替参数名，但是如果已经使用下划线来省略参数时候，是不能用it来代替当前参数的</li>
-<li>Lambda 最后一条语句的执行结果，表示这个表达式的返回值</li>
-</ul>
-<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>当函数的参数为闭包时，称这个函数为高阶函数  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val printMsg = &#123;str : String -&gt; print(str)&#125;</span><br><span class="line">val log = &#123; str: String , log:(String)-&gt; Unit -&gt; log(str) &#125;</span><br><span class="line"></span><br><span class="line">fun main(args: Array&lt;String&gt;) &#123;</span><br><span class="line"> log(&quot;hello&quot;,printMsg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>printMsg 是一个 lambda表达式 参数为 String<br>log是一个lambda表达式 参数为 String和一个函数  </p>
-<p><strong><em>TODO</em></strong></p>
-<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>object 可以定义在全局也可以在类的内部使用<br>object 就是单例模式的化身<br>object 可以实现 Java 中的匿名类<br>companion object 就是 Java 中的 static 变量<br>companion object 只能定义在对应的类中 </p>
-<h3 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h3><p>Kotlin 的属性是天生再带set、get方法的，如果要重写他们的时候需要用到field这个东西，field就是该属性本身的意思。<br><strong><em>TODO</em></strong></p>
-<h3 id="集合和函数操作符"><a href="#集合和函数操作符" class="headerlink" title="集合和函数操作符"></a>集合和函数操作符</h3><h4 id="总数操作符："><a href="#总数操作符：" class="headerlink" title="总数操作符："></a>总数操作符：</h4><p>any，至少有一个符合要求返回rue<br>all，全部都要符合要求返回true<br>count，返回条件判断的总数<br>fold，从第一项，到底i项<br>foldRight，从最后一项，到第n-i项<br>forEach，遍历所有元素<br>forEachIndexed，  </p>
-<h4 id="过滤操作符："><a href="#过滤操作符：" class="headerlink" title="过滤操作符："></a>过滤操作符：</h4><ul>
-<li>drop，去掉前n个元素 </li>
-<li>dropWhile从第一项开始去掉指定元素的列表 </li>
-<li>dropLastWhile 从最后一项开始</li>
-<li>filter 过滤掉所有符合函数条件的元素</li>
-<li>filterNot 过滤掉所有不符合条件的元素</li>
-<li>slice 过滤一个list中指定index的元素</li>
-<li>take 返回从第一开元素开始的n个元素</li>
-<li>takeLast 返回从最后一个元素开始的n个元素</li>
-<li>takeWhile 返回从第一个元素开始符合条件的元素<h4 id="映射操作符："><a href="#映射操作符：" class="headerlink" title="映射操作符："></a>映射操作符：</h4></li>
-<li>flatMap 为每一个元素通过函数省城新的元素集合</li>
-<li>groupBy 返回一个根据给定函数分组后的map</li>
-<li>map 返回每一个元素根据给定的函数所转换成的list</li>
-<li>mapIndexed 返回一个每一个</li>
-<li>mapNotNull 返回每一个飞null元素根据指定的函数所转换成的list<h4 id="元素操作符"><a href="#元素操作符" class="headerlink" title="元素操作符"></a>元素操作符</h4></li>
-<li>contains 如果指定元素可以在集合中找到返回true</li>
-<li>elementAt 返回给定index对应的元素，注意不能越界</li>
-<li>elementAtOrElse 如果越界返回默认值</li>
-<li>elementAtOrNull </li>
-<li>first 返回符合给定函数的第一个元素</li>
-<li>firstOrNull 没有返回null</li>
-<li>indexOf 返回指定元素的第一个index 不存在-1</li>
-<li>indexOfFirst  返回符合条件的第一个元素的index 没有-1</li>
-<li>indexOfLast 返回最后一个符合给定函数的元素的index 没有-1</li>
-<li>last 返回符合给定函数的最后一个元素</li>
-<li>single 返回符合非定函数的单个元素，</li>
-</ul>
-<h4 id="生产操作符"><a href="#生产操作符" class="headerlink" title="生产操作符"></a>生产操作符</h4><ul>
-<li>merge 把两个集合合并成一个新的，相同的index的元素通过给定的函数进行合并成新的元素，作为新的元素几个的一个元素，返回这个新的集合，新的集合的大小有最小的那个集合大小决定。</li>
-<li>partition 通过非定的函数条件，把一个给定的集合分割成两个</li>
-<li>plus + 两个集合相加</li>
-</ul>
-<h4 id="顺序操作符"><a href="#顺序操作符" class="headerlink" title="顺序操作符"></a>顺序操作符</h4><ul>
-<li>reverse 返回一个翻转原list的list</li>
-<li>sort 排序</li>
-<li>sortBy 根据指定函数排序</li>
-<li>sortDescending 降序排列</li>
-<li>sortDescendingBy 。。</li>
-</ul>
-<h3 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val a : Int? = null</span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过在类型的后面增加一个问号，就表示允许这个变量为null  </li>
-<li>一个可null的变量，在没有检查之前就去使用它，是不能通过编译的。</li>
-<li>还有一个特性就是，当我们检查了变量是否为null之后，就可以自动推导出变量不可为null，进而可以使用，编译通过。  </li>
-</ul>
-<p>这里使用<strong>安全访问操作符（？）</strong>，来达到判断并推导出可null类型。<br>如果我们确定正在使用一个非null得变量，但是他的类型却是可null类型的，我们可以强制使用！！来使编译器执行可null类型，来跳过限制检查。</p>
-<h3 id="委托模式"><a href="#委托模式" class="headerlink" title="委托模式"></a>委托模式</h3><p>他可以用来从类中抽取出主要负责的部分。<br>委托者只需要指定实现的接口的实例，我们可以使用接口指示鸟可飞行，但是鸟的飞行方式呗定义在一个委托中，这个委托定义在构造函数中，所以我们可以针对不同的鸟使用不同的飞行方式，动物使用翅膀飞行的方式被定义在另一个类中，<br><strong><em>TODO</em></strong></p>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>可以使用任何类型初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class TypedClass&lt;T&gt;(parameter: T) &#123;  </span><br><span class="line">    val value: T = parameter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果在初始化的时候可以推断出参数的类型，甚至可以不需要去指定泛型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val t1 = TypedClass&lt;String&gt;(&quot;Hello World!&quot;)</span><br><span class="line">val t2 = TypedClass&lt;Int&gt;(25)  </span><br><span class="line">val t2 = TypedClass&lt;Int&gt;(25)</span><br></pre></td></tr></table></figure></p>
-<p>如果是一个null，则不能推断出他的类型，所以必须要加上？<br>函数中也可以使用泛型  </p>
-<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><p>s</p>
-
           
+函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式
+如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，               12345var name: String = &quot;&quot;  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/17/blog/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -440,7 +405,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/goodicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -488,6 +453,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -506,17 +500,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/17/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -588,7 +580,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
+                src="/images/goodicon.png"
                 alt="Zhaocy" />
             
               <p class="site-author-name" itemprop="name">Zhaocy</p>
@@ -678,7 +670,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -784,6 +776,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
 
   
@@ -847,5 +846,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
