@@ -815,7 +815,7 @@
           owner: 'o0o0oo00',
           admin: ['o0o0oo00'],
           id: location.pathname,
-          labels: 'gitalk',
+          labels: 'gitalk'.split(',').filter(l => l),
           perPage: 15,
           pagerDirection: 'last',
           createIssueManually: true,
