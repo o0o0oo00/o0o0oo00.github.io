@@ -1,4 +1,4 @@
-https://o0o0oo00.github.io/2018/10/09/观察者模式简述/
+https://o0o0oo00.github.io/2018/10/09/Observer/
 https://o0o0oo00.github.io/2018/10/03/Personal-introduction/
 https://o0o0oo00.github.io/2018/09/27/小雨/
 https://o0o0oo00.github.io/2018/09/25/天气好好/
