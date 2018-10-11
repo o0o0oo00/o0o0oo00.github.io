@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#### 你给别人的是善意，照亮的确实你自己">
+<meta name="description" content="泛型泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。看一个例子，证明为什么要有泛型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018.9.21 秋高气爽">
-<meta property="og:url" content="https://o0o0oo00.github.io/2018/09/21/2018-9-21-秋高气爽/index.html">
+<meta property="og:title" content="泛型简述">
+<meta property="og:url" content="https://o0o0oo00.github.io/2018/10/11/fx/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="#### 你给别人的是善意，照亮的确实你自己">
+<meta property="og:description" content="泛型泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。看一个例子，证明为什么要有泛型">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T03:09:47.000Z">
+<meta property="og:updated_time" content="2018-10-11T08:50:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018.9.21 秋高气爽">
-<meta name="twitter:description" content="#### 你给别人的是善意，照亮的确实你自己">
+<meta name="twitter:title" content="泛型简述">
+<meta name="twitter:description" content="泛型泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。看一个例子，证明为什么要有泛型">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://o0o0oo00.github.io/2018/09/21/2018-9-21-秋高气爽/"/>
+  <link rel="canonical" href="https://o0o0oo00.github.io/2018/10/11/fx/"/>
 
 
 
 
 
-  <title>2018.9.21 秋高气爽 | Zhaocy</title>
+  <title>泛型简述 | Zhaocy</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/09/21/2018-9-21-秋高气爽/">
+    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/10/11/fx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
@@ -283,7 +283,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">2018.9.21 秋高气爽</h2>
+          <h2 class="post-title" itemprop="name headline">泛型简述</h2>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T10:53:02+08:00">
-                2018-09-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T16:48:12+08:00">
+                2018-10-11
               </time>
             
 
@@ -318,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Diary/" itemprop="url" rel="index">
-                    <span itemprop="name">Diary</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  16字
+                  1.3k字
                 </span>
               
 
@@ -365,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  5分钟
                 </span>
               
             </div>
@@ -386,7 +386,62 @@
       
 
       
-        <blockquote class="blockquote-center"><br>#### 你给别人的是善意，照亮的确实你自己<br></blockquote>
+        <h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。<br>看一个例子，证明为什么要有泛型<br><a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Cache &#123;</span><br><span class="line">var value: Any? = null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们操作数据的时候是酱紫的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cache cache = new Cache();</span><br><span class="line">cache.setValue(&quot;123&quot;);</span><br><span class="line">String str = (String) cache.getValue();</span><br></pre></td></tr></table></figure>
+<p>显然需要一个强制类型转换才能取出理想的数据。<br>我们来看使用泛型的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Cache&lt;T&gt; &#123;</span><br><span class="line">var value: T? = null</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cache&lt;String&gt; cache = new Cache&lt;String&gt;();</span><br><span class="line">cache.setValue(&quot;123&quot;);</span><br><span class="line">String str =cache.getValue();</span><br></pre></td></tr></table></figure>
+<p>你看，不用强制类型转换了吧~而且泛型可以传入任何一种想要的类型<br>泛型可以将类型参数化，但是参数一旦确定好，如果类似不匹配，编译器就不通过。<br><strong>好处：</strong>  </p>
+<ol>
+<li>它提供了一种扩展能力  </li>
+<li>它是一种类型安全检测机制  </li>
+<li>泛型提高了程序代码的可读性  </li>
+</ol>
+<h4 id="按照使用方式"><a href="#按照使用方式" class="headerlink" title="按照使用方式"></a>按照使用方式</h4><ol>
+<li>泛型类。 </li>
+<li>泛型方法。 </li>
+<li>泛型接口。</li>
+</ol>
+<p><strong>定义一个泛型类,理论上这个ZCY可以是任何</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Cache&lt;ZCY&gt; &#123;</span><br><span class="line">var value: ZCY? = null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Cache&lt;ZCY1,ZCY2&gt; &#123;</span><br><span class="line">var value: ZCY1? = null</span><br><span class="line">var value2: ZCY2? = null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但出于规范的目的，Java 还是建议我们用单个大写字母来代表类型参数。常见的如：</p>
+<ol>
+<li>T 代表一般的任何类。 </li>
+<li>E 代表 Element 的意思，或者 Exception 异常的意思。 </li>
+<li>K 代表 Key 的意思。 </li>
+<li>V 代表 Value 的意思，通常与 K 一起配合使用。 </li>
+<li>S 代表 Subtype 的意思</li>
+</ol>
+<p><strong>泛型方法</strong><br>泛型方法所定义的泛型与其所在类的泛型互相不冲突，类的ZCY可以是String类型，而方法的ZCY可以是Int类型，它只是一泛泛的类型而已</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fun someThing(some: ZCY2): ZCY1? &#123;</span><br><span class="line">return null</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">@Throws(IllegalAccessException::class, InstantiationException::class)</span><br><span class="line">fun &lt;T&gt; fun1(t: Class&lt;T&gt;): T &#123;</span><br><span class="line">return t.newInstance()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><p>除了用<code>&lt;T&gt;</code>表示泛型外，还有 <code>&lt;?&gt;</code> 这种形式。<code>？</code> 被称为通配符。<br>有需求说希望泛型可以处理某一范围内的数据类型，比如某个类和他的子类  </p>
+<h5 id="三种形式的通配符"><a href="#三种形式的通配符" class="headerlink" title="三种形式的通配符"></a>三种形式的通配符</h5><p>如果存在了通配符，那么它就丧失了“写”的能力，因为它属于未知类型。<br>下面的编译是不会通过的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;?&gt; test1 = new ArrayList&lt;&gt;();</span><br><span class="line">test1.add(&quot;123&quot;));</span><br><span class="line">test1.add(123);</span><br></pre></td></tr></table></figure>
+<p>于是乎，通配符用来指明泛型<strong>范围</strong>、<strong>边界</strong></p>
+<ol>
+<li>&lt;?&gt; 被称作无限定的通配符。</li>
+<li>&lt;? extends T&gt; 被称作有上限的通配符。</li>
+<li>&lt;? super T&gt; 被称作有下限的通配符。 </li>
+</ol>
+<p>时常（哦不，应该是一直）搞不懂他俩的区别<br>For Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plate&lt;Fruit&gt; plate = new Plate&lt;Apple&gt;(new Apple());</span><br></pre></td></tr></table></figure>
+<p>这样子是不能通过编译的，<strong>因为一个装苹果的盘子不能变成一个装水果的盘子</strong>。沙雕玩意 ┐(ﾟ～ﾟ)┌<br>就算容器里装的东西之间有继承关系，但容器之间是没有继承关系的。所以我们不能像<code>Fruit fruit = new Apple();</code>这么样写。</p>
+<p><strong>有上限通配符</strong>：<br><code>Plate&lt;？ extends Fruit&gt;</code><br>就是说水果以及水果的子类可以放进盘子里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plate&lt;? extends Fruit&gt; plate = new Plate&lt;Apple&gt;(new Apple());</span><br></pre></td></tr></table></figure>
+<p>此时我们发现set方法失效了，原因是编辑器只知道可以set进去Fruit和它的子类，但是具体的类型不知道，可能是Apple，可能是Banana、Orange。所以就不允许。（可是为什么构造方法可以啊？摊手┑(￣Д ￣)┍）<br><strong>那么我们就可以得出结论 <code>？</code>代表我知道它是一个东西，具体是什么我不知道</strong>  </p>
+<p><strong>有下限通配符</strong>：<br><code>Plate&lt;? super Fruit&gt;</code>就是水果以及水果的父类（食物）可以放进盘子里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Plate&lt;? super Fruit&gt; plate = new Plate&lt;Fruit&gt;(new Fruit());</span><br><span class="line">plate.set(new Apple());</span><br><span class="line">plate.set(new Fruit());</span><br><span class="line">plate.set(new Food());//报错</span><br><span class="line">Object o = plate.get();</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，水果（Apple 或者 Fruit）可以放进盘子里面，但是Food这一行会报错的，<strong>因为食物Food不一定是水果</strong>，也可能是肉、蔬菜，所以它不能放盘子里面。<br>下限通配符，放开了存储，但是取出来的话就会失效一部分，因为取出来的不知道到底是什么类型，Apple? Fruit? Banana? 不确定 <strong>所以只能用Object来接收</strong>，这样就把元素的类型信息丢掉了。 (●ﾟωﾟ●)</p>
+<h5 id="PECS"><a href="#PECS" class="headerlink" title="PECS:"></a>PECS:</h5><ul>
+<li>频繁往外读取内容的，适合用上界Extends。</li>
+<li>经常往里插入的，适合用下界Super。</li>
+</ul>
+<h4 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h4><p>java中的泛型，是相对于<strong>编辑器</strong>阶段的，在<strong>编译</strong>期间java的字节码中是不包含泛型信息的。</p>
+<p>看一段代码，这段代码的结果是true，是因为在进入JVM之前，与泛型相关的信息，T 会被类型擦除，无论 T 是String，还是Integer都被替换成了Object，如果指定了上限&lt;? extends String&gt;那么就会被擦除成上限String。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; l1 = new ArrayList&lt;String&gt;();</span><br><span class="line">List&lt;Integer&gt; l2 = new ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">System.out.println(l1.getClass() == l2.getClass());</span><br></pre></td></tr></table></figure>
+<p><strong>Attention</strong><br>泛型类或者泛型方法中，不接受 8 种基本数据类型。要接受也是他们的包装类。  </p>
 
       
     </div>
@@ -419,8 +474,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/18/twitter/" rel="next" title="twitter 登录 分享">
-                <i class="fa fa-chevron-left"></i> twitter 登录 分享
+              <a href="/2018/10/10/annotation/" rel="next" title="注解知识简述">
+                <i class="fa fa-chevron-left"></i> 注解知识简述
               </a>
             
           </div>
@@ -428,10 +483,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/23/有风冷了/" rel="prev" title="2018.9.23 有风冷了">
-                2018.9.23 有风冷了 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,8 +537,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -558,6 +618,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按照使用方式"><span class="nav-number">1.1.</span> <span class="nav-text">按照使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通配符"><span class="nav-number">1.2.</span> <span class="nav-text">通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三种形式的通配符"><span class="nav-number">1.2.1.</span> <span class="nav-text">三种形式的通配符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PECS"><span class="nav-number">1.2.2.</span> <span class="nav-text">PECS:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型擦除"><span class="nav-number">1.3.</span> <span class="nav-text">类型擦除</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
