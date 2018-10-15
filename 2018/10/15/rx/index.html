@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="RxJava - 异步Observable(被观察者)的创建它没有公开的构造方法，是通过内部的Create方法来创建一个 1234Observable&amp;lt;String&amp;gt; observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() &amp;#123;@Overridepublic void call(Subs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava - 异步">
+<meta property="og:url" content="https://o0o0oo00.github.io/2018/10/15/rx/index.html">
+<meta property="og:site_name" content="Zhaocy">
+<meta property="og:description" content="RxJava - 异步Observable(被观察者)的创建它没有公开的构造方法，是通过内部的Create方法来创建一个 1234Observable&amp;lt;String&amp;gt; observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() &amp;#123;@Overridepublic void call(Subs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-15T09:32:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava - 异步">
+<meta name="twitter:description" content="RxJava - 异步Observable(被观察者)的创建它没有公开的构造方法，是通过内部的Create方法来创建一个 1234Observable&amp;lt;String&amp;gt; observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() &amp;#123;@Overridepublic void call(Subs">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://o0o0oo00.github.io/2018/10/15/rx/"/>
+
+
+
+
+
+  <title>RxJava - 异步 | Zhaocy</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!--动态标题-->
+<script type="text/javascript" src="/js/src/dytitle.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+<a href="https://github.com/o0o0oo00" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zhaocy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">普通的大帅比而已◕‿‿◕｡</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言板">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            留言板
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-友情链接">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            友情链接
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/10/15/rx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaocy">
+      <meta itemprop="description" content="爱生活 爱自己 积极向上">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhaocy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RxJava - 异步</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-15T17:27:52+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RxJava-异步"><a href="#RxJava-异步" class="headerlink" title="RxJava - 异步"></a>RxJava - 异步</h1><h3 id="Observable-被观察者-的创建"><a href="#Observable-被观察者-的创建" class="headerlink" title="Observable(被观察者)的创建"></a>Observable(被观察者)的创建</h3><p>它没有公开的构造方法，是通过内部的Create方法来创建一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable = Observable.create(new Observable.OnSubscribe&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call(Subscriber&lt;? super String&gt; subscriber) &#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="Subscriber-Observer-观察者-的创建"><a href="#Subscriber-Observer-观察者-的创建" class="headerlink" title="Subscriber/Observer(观察者)的创建"></a>Subscriber/Observer(观察者)的创建</h3><p>Subscriber 对 Observer 接口进行了一些扩展，但他们的基本使用方式是完全一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">Subscriber&lt;String&gt; subscriber = new Subscriber&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void onCompleted() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onError(Throwable e) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onNext(String s) &#123;</span><br><span class="line">System.out.println(&quot;subscriber&quot; + s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Observer&lt;String&gt; observer = new Observer&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void onCompleted() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onError(Throwable e) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onNext(String s) &#123;</span><br><span class="line">System.out.println(&quot;observer&quot;+s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="观察者响应被观察者"><a href="#观察者响应被观察者" class="headerlink" title="观察者响应被观察者"></a>观察者响应被观察者</h3><p>我们知道<a href="https://o0o0oo00.github.io/2018/10/09/Observer/#more">观察者模式</a>，是<strong>被观察者持有观察者</strong>的引用，进而遍历所有观察者，调用（通知）其方法来达到响应的目的。<br>所以我们看RxJava中的关联方式是通过<strong>被观察者订阅被观察者</strong>observable.subscribe(observer/subscriber)来实现的。这个地方可能与概念有些不贴切，因为概念是观察者要响应的是被观察者，所以这里通过<strong>被观察者订阅被观察者</strong>来达到<strong>观察者响应被观察者</strong>的目的</p>
+<ol>
+<li>创建被观察者<code>Observable</code>与观察者<code>Observer</code>对象</li>
+<li>观察者订阅被观察者，实际是<strong>观察者</strong>当做参数传入<strong>被观察者</strong> <code>observable.subscribe(observer);</code></li>
+<li><strong>被观察者</strong><code>Observable</code>的重写方法<code>call()</code>中调用<strong>观察者</strong><code>Observer</code>的<code>onNext</code>方法。然后<code>Observer</code><strong>重写</strong>的<code>onNext</code>进行相应的处理</li>
+</ol>
+<h3 id="Observable的其他创建方式"><a href="#Observable的其他创建方式" class="headerlink" title="Observable的其他创建方式"></a>Observable的其他创建方式</h3><h4 id="Observable-just-t-T-具有多个参数的重载方法，源码中就有多达10个参数的重载方法。"><a href="#Observable-just-t-T-具有多个参数的重载方法，源码中就有多达10个参数的重载方法。" class="headerlink" title="Observable.just(t : T) 具有多个参数的重载方法，源码中就有多达10个参数的重载方法。"></a>Observable.just(t : T) 具有多个参数的重载方法，源码中就有多达10个参数的重载方法。</h4><p>例如：相当于执行<code>call</code>方法中的<code>subscriber.`</code>onNext(“123”)<code>onNext(&quot;234&quot;)</code>onCompleted()`</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(&quot;123&quot;,&quot;234&quot;).subscribe(new Observer&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void onCompleted() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onError(Throwable e) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onNext(String s) &#123;</span><br><span class="line">System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Observable-from-Iterable-lt-extends-T-gt-iterable"><a href="#Observable-from-Iterable-lt-extends-T-gt-iterable" class="headerlink" title="Observable.from(Iterable&lt;? extends T&gt; iterable)"></a>Observable.from(Iterable&lt;? extends T&gt; iterable)</h4><p><code>from(Iterable&lt;? extends T&gt; iterable)</code><strong>支持从数组或者是实现了Iterator接口的集合中接收参数</strong><br>例如：这两种方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Observable.from(new String[]&#123;&quot;345&quot;,&quot;456&quot;&#125;).subscribe(new Observer&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void onCompleted() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onError(Throwable e) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onNext(String s) &#123;</span><br><span class="line">System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">list.add(&quot;567&quot;);</span><br><span class="line">list.add(&quot;678&quot;);</span><br><span class="line">Observable.from(list).subscribe(new Observer&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void onCompleted() &#123;</span><br><span class="line">System.out.println(&quot;onCompleted&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onError(Throwable e) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onNext(String s) &#123;</span><br><span class="line">System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>PostScript</strong>：当just参数在2个以上时，实际上内部调用的也是from(T[] array)方法。</p>
+<h4 id="Action0、Action1-lt-T-gt-…-Action9-lt-T1-T2-T3-T4-T5-T6-T7-T8-T9-gt"><a href="#Action0、Action1-lt-T-gt-…-Action9-lt-T1-T2-T3-T4-T5-T6-T7-T8-T9-gt" class="headerlink" title="Action0、Action1&lt;T&gt; … Action9&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;"></a><code>Action0</code>、<code>Action1&lt;T&gt;</code> … <code>Action9&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;</code></h4><p>0个参数的Action,1个参数的Action<br>Action0 可以被当成一个包装对象，将 onCompleted() 的内容打包起来将自己作为一个参数传入 subscribe() 以实现不完整定义的回调。由于 onNext(T obj) 和 onError(Throwable error) 也是单参数无返回值的，因此 Action1 可以将 onNext(obj) 和onError(error) 打包起来传入 subscribe() 以实现不完整定义的回调。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable = Observable.create(new Observable.OnSubscribe&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call(Subscriber&lt;? super String&gt; subscriber) &#123;</span><br><span class="line">subscriber.onNext(&quot;123&quot;);</span><br><span class="line">subscriber.onNext(&quot;234&quot;);</span><br><span class="line">subscriber.onCompleted();</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observable.subscribe(new Action1&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call(String s) &#123;</span><br><span class="line">System.out.println(&quot;onNext&quot;+s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;, new Action1&lt;Throwable&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call(Throwable throwable) &#123;</span><br><span class="line">System.out.println(&quot;onError&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;, new Action0() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call() &#123;</span><br><span class="line">System.out.println(&quot;onComplete&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>来看看源码中定义的使用方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public final Subscription subscribe(final Action1&lt;? super T&gt; onNext) &#123;</span><br><span class="line">if (onNext == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onNext can not be null&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Action1&lt;Throwable&gt; onError = InternalObservableUtils.ERROR_NOT_IMPLEMENTED;</span><br><span class="line">Action0 onCompleted = Actions.empty();</span><br><span class="line">return subscribe(new ActionSubscriber&lt;T&gt;(onNext, onError, onCompleted));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public final Subscription subscribe(final Action1&lt;? super T&gt; onNext, final Action1&lt;Throwable&gt; onError) &#123;</span><br><span class="line">if (onNext == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onNext can not be null&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (onError == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onError can not be null&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Action0 onCompleted = Actions.empty();</span><br><span class="line">return subscribe(new ActionSubscriber&lt;T&gt;(onNext, onError, onCompleted));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public final Subscription subscribe(final Action1&lt;? super T&gt; onNext, final Action1&lt;Throwable&gt; onError, final Action0 onCompleted) &#123;</span><br><span class="line">if (onNext == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onNext can not be null&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (onError == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onError can not be null&quot;);</span><br><span class="line"></span><br><span class="line">if (onCompleted == null) &#123;</span><br><span class="line">throw new IllegalArgumentException(&quot;onComplete can not be null&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return subscribe(new ActionSubscriber&lt;T&gt;(onNext, onError, onCompleted));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无论传入几个Action，最后都会返回<code>subscribe(new ActionSubscriber&lt;T&gt;(onNext, onError, onCompleted));</code><br>哎呀，听人家讲不如自己去看看源码，也没几行 (●ﾟωﾟ●)</p>
+<p>上面这些都只是皮毛啦，RxJava真正的意义在于<strong>异步</strong>，『后台处理，前台回调』，而要实现异步，则需要用到 RxJava 的另一个概念： Scheduler 。</p>
+<h3 id="线程控制Scheduler"><a href="#线程控制Scheduler" class="headerlink" title="线程控制Scheduler"></a>线程控制Scheduler</h3><p>用于指定每一段代码运行在什么样的线程之中。RxJava内置的Scheduler：</p>
+<ul>
+<li><code>Schedulers.immediate()</code>: 直接在当前线程运行，相当于不指定线程。这是默认的 Scheduler。</li>
+<li><code>Schedulers.newThread()</code>: 总是启用新线程，并在新线程执行操作。</li>
+<li><code>Schedulers.io()</code>: I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程。</li>
+<li>另外， Android 还有一个专用的 <code>AndroidSchedulers.mainThread()</code>，它指定的操作将在 Android 主线程运行。</li>
+</ul>
+<p>有了这些个SchedulerJ就可以用<code>subscribeOn `</code>observeOn `这两个方法来对线程进行控制了。分别指定<strong>观察者在主线程</strong>用于更新UI，<strong>被观察者位于io线程</strong>执行以下耗时的操作。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Observable.just(123, 123, 123)</span><br><span class="line">.subscribeOn(AndroidSchedulers.mainThread())</span><br><span class="line">.observeOn(Schedulers.io())</span><br><span class="line">.subscribe &#123; integer -&gt; println(integer!!.toString()) &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="变换与操作符"><a href="#变换与操作符" class="headerlink" title="变换与操作符"></a>变换与操作符</h3><p><strong>所谓变换，就是将事件序列中的对象或整个序列进行加工处理，转换成不同的事件或事件序列。</strong></p>
+<h4 id="map-操作符"><a href="#map-操作符" class="headerlink" title="map()操作符"></a>map()操作符</h4><p>func1有两个泛型，一个是输入泛型，一个是输出泛型，可以看到下面这个例子，输入的是Integer类型，在map的重写方法中进行一系列操作例如<code>integer.toString()</code>来将输入类型转换为输出类型。于是观察者收到的类型就变成了String</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">observable.map(new Func1&lt;Integer, String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public String call(Integer integer) &#123;</span><br><span class="line">return integer.toString();</span><br><span class="line">&#125;</span><br><span class="line">&#125;).subscribe(new Action1&lt;String&gt;() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void call(String s) &#123;</span><br><span class="line">System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>太多了，待续。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------------- END -------------</div>
+    
+</div>
+  
+    </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/12/reflection/" rel="next" title="Java反射">
+                <i class="fa fa-chevron-left"></i> Java反射
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Zhaocy" />
+            
+              <p class="site-author-name" itemprop="name">Zhaocy</p>
+              <p class="site-description motion-element" itemprop="description">爱生活 爱自己 积极向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/o0o0oo00" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zcypro@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RxJava-异步"><span class="nav-number">1.</span> <span class="nav-text">RxJava - 异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observable-被观察者-的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">Observable(被观察者)的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subscriber-Observer-观察者-的创建"><span class="nav-number">1.0.2.</span> <span class="nav-text">Subscriber/Observer(观察者)的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者响应被观察者"><span class="nav-number">1.0.3.</span> <span class="nav-text">观察者响应被观察者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observable的其他创建方式"><span class="nav-number">1.0.4.</span> <span class="nav-text">Observable的其他创建方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Observable-just-t-T-具有多个参数的重载方法，源码中就有多达10个参数的重载方法。"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">Observable.just(t : T) 具有多个参数的重载方法，源码中就有多达10个参数的重载方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Observable-from-Iterable-lt-extends-T-gt-iterable"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">Observable.from(Iterable&lt;? extends T&gt; iterable)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Action0、Action1-lt-T-gt-…-Action9-lt-T1-T2-T3-T4-T5-T6-T7-T8-T9-gt"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">Action0、Action1&lt;T&gt; … Action9&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程控制Scheduler"><span class="nav-number">1.0.5.</span> <span class="nav-text">线程控制Scheduler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变换与操作符"><span class="nav-number">1.0.6.</span> <span class="nav-text">变换与操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map-操作符"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">map()操作符</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhaocy</span>
+
+  
+</div>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+<br/>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/17/2018 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'c42a8b4cc80b306bffbb',
+          clientSecret: 'd3005e3cad0fe1137b5ea45b29d15121e2c6accf',
+          repo: 'comment',
+          owner: 'o0o0oo00',
+          admin: ['o0o0oo00'],
+          id: location.pathname,
+          labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":75,"height":180},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+</html>
