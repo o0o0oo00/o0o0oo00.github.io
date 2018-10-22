@@ -1819,7 +1819,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a88fff;
+  background: #b9b3ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3137,7 +3137,7 @@ pre .javascript .function {
   font-family: 'Arkipelago-2' !important;
 }
 body {
-  background: url("/images/FloatingIce.jpg");
+  background: url("/images/Wave.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -3145,12 +3145,12 @@ body {
 }
 .headband {
   height: 3px;
-  background: #71bde5;
+  background: #12cd6f;
 }
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #71bde5;
+  background: #12cd6f;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -3158,12 +3158,12 @@ body {
   color: #fff;
 }
 .btn {
-  color: #71bde5;
+  color: #12cd6f;
   background: #fff;
-  border: 2px solid #71bde5;
+  border: 2px solid #12cd6f;
 }
 .btn:hover {
-  border-color: #71bde5;
+  border-color: #12cd6f;
   color: #fff;
-  background: #71bde5;
+  background: #12cd6f;
 }

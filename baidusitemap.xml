@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://o0o0oo00.github.io/2018/10/17/rx2/</loc>
-    <lastmod>2018-10-17T08:07:38.000Z</lastmod>
+    <loc>https://o0o0oo00.github.io/2018/10/22/rxScheduler/</loc>
+    <lastmod>2018-10-22T08:11:11.000Z</lastmod>
+  </url>  <url>
+    <loc>https://o0o0oo00.github.io/2018/09/17/hello-world/</loc>
+    <lastmod>2018-10-19T02:42:32.000Z</lastmod>
   </url>  <url>
     <loc>https://o0o0oo00.github.io/2018/10/16/rxoperator/</loc>
     <lastmod>2018-10-17T08:06:17.000Z</lastmod>
@@ -12,9 +15,6 @@
   </url>  <url>
     <loc>https://o0o0oo00.github.io/2018/10/12/reflection/</loc>
     <lastmod>2018-10-12T09:51:23.000Z</lastmod>
-  </url>  <url>
-    <loc>https://o0o0oo00.github.io/2018/09/17/hello-world/</loc>
-    <lastmod>2018-10-12T02:06:20.000Z</lastmod>
   </url>  <url>
     <loc>https://o0o0oo00.github.io/2018/10/11/fx/</loc>
     <lastmod>2018-10-11T08:50:13.000Z</lastmod>
