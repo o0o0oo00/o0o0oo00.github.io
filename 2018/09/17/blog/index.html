@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式 如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，">
+<meta name="description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Meet Kotlin">
 <meta property="og:url" content="https://o0o0oo00.github.io/2018/09/17/blog/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式 如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，">
+<meta property="og:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T03:10:09.000Z">
+<meta property="og:updated_time" content="2018-10-24T11:25:10.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Meet Kotlin">
-<meta name="twitter:description" content="函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式 如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，">
+<meta name="twitter:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
 
 
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k字
+                  2.2k字
                 </span>
               
 
@@ -365,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7分钟
+                  8分钟
                 </span>
               
             </div>
@@ -386,7 +386,24 @@
       
 
       
-        <ol>
+        <h3 id="Kotlin的几个特性"><a href="#Kotlin的几个特性" class="headerlink" title="Kotlin的几个特性"></a>Kotlin的几个特性</h3><h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><h4 id="尾随闭包"><a href="#尾随闭包" class="headerlink" title="尾随闭包"></a>尾随闭包</h4><p>当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。</p>
+<h4 id="标准函数"><a href="#标准函数" class="headerlink" title="标准函数"></a>标准函数</h4><ul>
+<li>with</li>
+<li>apply</li>
+<li>run</li>
+<li>let<h4 id="data-class"><a href="#data-class" class="headerlink" title="data class"></a>data class</h4>参数中可定义成员变量、可选参数、命名参数等</li>
+</ul>
+<h4 id="apply-plugin-‘kotlin-android-extensions’"><a href="#apply-plugin-‘kotlin-android-extensions’" class="headerlink" title="apply plugin: ‘kotlin-android-extensions’"></a>apply plugin: ‘kotlin-android-extensions’</h4><p>直接使用id作为view对象，无需findviewbyid</p>
+<h4 id="简化lambda表达式"><a href="#简化lambda表达式" class="headerlink" title="简化lambda表达式"></a>简化lambda表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123;</span><br><span class="line">             ....</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="配合RxJava"><a href="#配合RxJava" class="headerlink" title="配合RxJava"></a>配合RxJava</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable.create(ObservableOnSubscribe&lt;Long&gt;&#123;</span><br><span class="line">    Log.e(TAG, &quot;发射 线程为：$&#123;Thread.currentThread().name&#125; &quot;)</span><br><span class="line">    it.onNext(12L)</span><br><span class="line">&#125;)</span><br><span class="line">    .filter &#123;</span><br><span class="line">        Log.e(TAG, &quot;filter 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@filter it &gt; 10</span><br><span class="line">    &#125;</span><br><span class="line">    .subscribeOn(Schedulers.io())</span><br><span class="line">    .map(Function&lt;Long, String&gt; &#123;</span><br><span class="line">        Log.e(TAG, &quot;map 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@Function it.toString()</span><br><span class="line">    &#125;)</span><br><span class="line">    .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">    .subscribe &#123;</span><br><span class="line">        Log.e(TAG, &quot;处理 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h4><ul>
+<li><code>？</code></li>
+<li><code>！！</code></li>
+</ul>
+<h4 id="lateinit"><a href="#lateinit" class="headerlink" title="lateinit"></a>lateinit</h4><p>延迟初始化</p>
+<h4 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h4><p>get{} / set{}</p>
+<p><hr><br><strong>详细笔记：</strong></p>
+<ol>
 <li>函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式</li>
 <li>如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法， <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var name: String = &quot;&quot;</span><br><span class="line">        get() = field.toUpperCase()</span><br><span class="line">        set(value)&#123;</span><br><span class="line">            field = &quot;Name: $value&quot;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
@@ -399,10 +416,10 @@
 <p>具有代码块的函数需要显示的指定返回值类型， </p>
 <p>可变数量的参数Varargs</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fun &lt;T&gt; asList(vararg ts:T): List&lt;T&gt; &#123;</span><br><span class="line">    val result = ArrayList&lt;T&gt;()</span><br><span class="line">    for(t in ts)//ts is an array</span><br><span class="line">        result.add(t)</span><br><span class="line">    return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) &#123;</span><br><span class="line">    Toast.makeText(this, message, duration).show()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扩展函数-1"><a href="#扩展函数-1" class="headerlink" title="扩展函数"></a>扩展函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) &#123;</span><br><span class="line">    Toast.makeText(this, message, duration).show()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>扩展了Context，直接使用this，来代表context的实例</p>
 <p><strong> 映射对象到变量中</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val f1 = Forecast(Date(), 27.5f, &quot;Shiny day&quot;)</span><br><span class="line">val (date, temperature, details) = f1</span><br><span class="line"></span><br><span class="line">for ((key, value) in map) &#123;</span><br><span class="line">    Log.d(&quot;map&quot;, &quot;key:$key, value:$value&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="扩展函数-1"><a href="#扩展函数-1" class="headerlink" title="扩展函数"></a>扩展函数</h3><p>扩展函数是指在一个类上面增加一种新的行为，它就表现的像是属于这个类一样，而且可以使用this关键字调用类的所有public方法.它可以被任何类和类的扩展子类调用。  </p>
+<h3 id="扩展函数-2"><a href="#扩展函数-2" class="headerlink" title="扩展函数"></a>扩展函数</h3><p>扩展函数是指在一个类上面增加一种新的行为，它就表现的像是属于这个类一样，而且可以使用this关键字调用类的所有public方法.它可以被任何类和类的扩展子类调用。  </p>
 <p>扩展函数是静态解析的，即使是在运行时参数传入其他类型，得出的结果仍然是声明时候的参数类型<br><strong>扩展函数中的操作符</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">operator fun ViewGroup.get(position: Int): View = getChildAt(position)  </span><br><span class="line"></span><br><span class="line">val container: ViewGroup = find(R.id.container)</span><br><span class="line">val view = container[2]</span><br></pre></td></tr></table></figure></p>
 <h3 id="Lambdas"><a href="#Lambdas" class="headerlink" title="Lambdas"></a>Lambdas</h3><p>定义一个匿名函数，<br>在箭头的左边指定参数，在箭头的右边返回函数执行的结果。<br>一直简写，可以写成这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123; toast(&quot;Click&quot;) &#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fun main(args: Array&lt;String&gt;) &#123;</span><br><span class="line">   val result = &#123;msg : String -&gt; print(msg)&#125;</span><br><span class="line">   result(&quot;hello&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -417,7 +434,7 @@
 <p>printMsg 是一个 lambda表达式 参数为 String<br>log是一个lambda表达式 参数为 String和一个函数  </p>
 <p><strong><em>TODO</em></strong></p>
 <h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>object 可以定义在全局也可以在类的内部使用<br>object 就是单例模式的化身<br>object 可以实现 Java 中的匿名类<br>companion object 就是 Java 中的 static 变量<br>companion object 只能定义在对应的类中 </p>
-<h3 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h3><p>Kotlin 的属性是天生再带set、get方法的，如果要重写他们的时候需要用到field这个东西，field就是该属性本身的意思。<br><strong><em>TODO</em></strong></p>
+<h3 id="委托属性-1"><a href="#委托属性-1" class="headerlink" title="委托属性"></a>委托属性</h3><p>Kotlin 的属性是天生再带set、get方法的，如果要重写他们的时候需要用到field这个东西，field就是该属性本身的意思。<br><strong><em>TODO</em></strong></p>
 <h3 id="集合和函数操作符"><a href="#集合和函数操作符" class="headerlink" title="集合和函数操作符"></a>集合和函数操作符</h3><h4 id="总数操作符："><a href="#总数操作符：" class="headerlink" title="总数操作符："></a>总数操作符：</h4><p>any，至少有一个符合要求返回rue<br>all，全部都要符合要求返回true<br>count，返回条件判断的总数<br>fold，从第一项，到底i项<br>foldRight，从最后一项，到第n-i项<br>forEach，遍历所有元素<br>forEachIndexed，  </p>
 <h4 id="过滤操作符："><a href="#过滤操作符：" class="headerlink" title="过滤操作符："></a>过滤操作符：</h4><ul>
 <li>drop，去掉前n个元素 </li>
@@ -458,7 +475,7 @@
 <li>sortDescending 降序排列</li>
 <li>sortDescendingBy 。。</li>
 </ul>
-<h3 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val a : Int? = null</span><br></pre></td></tr></table></figure>
+<h3 id="空安全-1"><a href="#空安全-1" class="headerlink" title="空安全"></a>空安全</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val a : Int? = null</span><br></pre></td></tr></table></figure>
 <ul>
 <li>通过在类型的后面增加一个问号，就表示允许这个变量为null  </li>
 <li>一个可null的变量，在没有检查之前就去使用它，是不能通过编译的。</li>
@@ -469,7 +486,6 @@
 <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>可以使用任何类型初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class TypedClass&lt;T&gt;(parameter: T) &#123;  </span><br><span class="line">    val value: T = parameter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果在初始化的时候可以推断出参数的类型，甚至可以不需要去指定泛型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val t1 = TypedClass&lt;String&gt;(&quot;Hello World!&quot;)</span><br><span class="line">val t2 = TypedClass&lt;Int&gt;(25)  </span><br><span class="line">val t2 = TypedClass&lt;Int&gt;(25)</span><br></pre></td></tr></table></figure></p>
 <p>如果是一个null，则不能推断出他的类型，所以必须要加上？<br>函数中也可以使用泛型  </p>
-<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><p>s</p>
 
       
     </div>
@@ -660,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数"><span class="nav-number">1.</span> <span class="nav-text">扩展函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展函数-1"><span class="nav-number"></span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambdas"><span class="nav-number"></span> <span class="nav-text">Lambdas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number"></span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number"></span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托属性"><span class="nav-number"></span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合和函数操作符"><span class="nav-number"></span> <span class="nav-text">集合和函数操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总数操作符："><span class="nav-number">1.</span> <span class="nav-text">总数操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤操作符："><span class="nav-number">2.</span> <span class="nav-text">过滤操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射操作符："><span class="nav-number">3.</span> <span class="nav-text">映射操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素操作符"><span class="nav-number">4.</span> <span class="nav-text">元素操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产操作符"><span class="nav-number">5.</span> <span class="nav-text">生产操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序操作符"><span class="nav-number">6.</span> <span class="nav-text">顺序操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空安全"><span class="nav-number"></span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托模式"><span class="nav-number"></span> <span class="nav-text">委托模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number"></span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变体"><span class="nav-number"></span> <span class="nav-text">变体</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin的几个特性"><span class="nav-number">1.</span> <span class="nav-text">Kotlin的几个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数"><span class="nav-number">1.1.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尾随闭包"><span class="nav-number">1.2.</span> <span class="nav-text">尾随闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准函数"><span class="nav-number">1.3.</span> <span class="nav-text">标准函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data-class"><span class="nav-number">1.4.</span> <span class="nav-text">data class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply-plugin-‘kotlin-android-extensions’"><span class="nav-number">1.5.</span> <span class="nav-text">apply plugin: ‘kotlin-android-extensions’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简化lambda表达式"><span class="nav-number">1.6.</span> <span class="nav-text">简化lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配合RxJava"><span class="nav-number">1.6.1.</span> <span class="nav-text">配合RxJava</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空安全"><span class="nav-number">1.7.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lateinit"><span class="nav-number">1.8.</span> <span class="nav-text">lateinit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#委托属性"><span class="nav-number">1.9.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数-1"><span class="nav-number">1.10.</span> <span class="nav-text">扩展函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展函数-2"><span class="nav-number">2.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambdas"><span class="nav-number">3.</span> <span class="nav-text">Lambdas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number">4.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">5.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托属性-1"><span class="nav-number">6.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合和函数操作符"><span class="nav-number">7.</span> <span class="nav-text">集合和函数操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总数操作符："><span class="nav-number">7.1.</span> <span class="nav-text">总数操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤操作符："><span class="nav-number">7.2.</span> <span class="nav-text">过滤操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射操作符："><span class="nav-number">7.3.</span> <span class="nav-text">映射操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素操作符"><span class="nav-number">7.4.</span> <span class="nav-text">元素操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产操作符"><span class="nav-number">7.5.</span> <span class="nav-text">生产操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序操作符"><span class="nav-number">7.6.</span> <span class="nav-text">顺序操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空安全-1"><span class="nav-number">8.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托模式"><span class="nav-number">9.</span> <span class="nav-text">委托模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number"></span> <span class="nav-text">泛型</span></a></div>
             
 
           </div>

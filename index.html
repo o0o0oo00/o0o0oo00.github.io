@@ -1796,7 +1796,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k字
+                  2.2k字
                 </span>
               
 
@@ -1812,7 +1812,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7分钟
+                  8分钟
                 </span>
               
             </div>
@@ -1834,7 +1834,24 @@
 
       
         
-          <ol>
+          <h3 id="Kotlin的几个特性"><a href="#Kotlin的几个特性" class="headerlink" title="Kotlin的几个特性"></a>Kotlin的几个特性</h3><h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><h4 id="尾随闭包"><a href="#尾随闭包" class="headerlink" title="尾随闭包"></a>尾随闭包</h4><p>当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。</p>
+<h4 id="标准函数"><a href="#标准函数" class="headerlink" title="标准函数"></a>标准函数</h4><ul>
+<li>with</li>
+<li>apply</li>
+<li>run</li>
+<li>let<h4 id="data-class"><a href="#data-class" class="headerlink" title="data class"></a>data class</h4>参数中可定义成员变量、可选参数、命名参数等</li>
+</ul>
+<h4 id="apply-plugin-‘kotlin-android-extensions’"><a href="#apply-plugin-‘kotlin-android-extensions’" class="headerlink" title="apply plugin: ‘kotlin-android-extensions’"></a>apply plugin: ‘kotlin-android-extensions’</h4><p>直接使用id作为view对象，无需findviewbyid</p>
+<h4 id="简化lambda表达式"><a href="#简化lambda表达式" class="headerlink" title="简化lambda表达式"></a>简化lambda表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123;</span><br><span class="line">             ....</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="配合RxJava"><a href="#配合RxJava" class="headerlink" title="配合RxJava"></a>配合RxJava</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable.create(ObservableOnSubscribe&lt;Long&gt;&#123;</span><br><span class="line">    Log.e(TAG, &quot;发射 线程为：$&#123;Thread.currentThread().name&#125; &quot;)</span><br><span class="line">    it.onNext(12L)</span><br><span class="line">&#125;)</span><br><span class="line">    .filter &#123;</span><br><span class="line">        Log.e(TAG, &quot;filter 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@filter it &gt; 10</span><br><span class="line">    &#125;</span><br><span class="line">    .subscribeOn(Schedulers.io())</span><br><span class="line">    .map(Function&lt;Long, String&gt; &#123;</span><br><span class="line">        Log.e(TAG, &quot;map 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@Function it.toString()</span><br><span class="line">    &#125;)</span><br><span class="line">    .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">    .subscribe &#123;</span><br><span class="line">        Log.e(TAG, &quot;处理 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h4><ul>
+<li><code>？</code></li>
+<li><code>！！</code></li>
+</ul>
+<h4 id="lateinit"><a href="#lateinit" class="headerlink" title="lateinit"></a>lateinit</h4><p>延迟初始化</p>
+<h4 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h4><p>get{} / set{}</p>
+<p><hr><br><strong>详细笔记：</strong></p>
+<ol>
 <li>函数参数可以添加默认值，这样可以不穿这个参数，相当于是重载的一种方式</li>
 <li>如果没有任何指定，类的属性会默认的使用getter和setter方法，当然也可以自定义setter方法与getter方法，
           <!--noindex-->
