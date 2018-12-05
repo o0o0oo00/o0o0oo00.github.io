@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
+<meta name="description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run let  data class参数中可定义成员变量、可选参数、命名参数等 apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Meet Kotlin">
 <meta property="og:url" content="https://o0o0oo00.github.io/2018/09/17/blog/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
+<meta property="og:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run let  data class参数中可定义成员变量、可选参数、命名参数等 apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-24T11:25:10.706Z">
+<meta property="og:updated_time" content="2018-12-05T07:07:40.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Meet Kotlin">
-<meta name="twitter:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run letdata class参数中可定义成员变量、可选参数、命名参数等  apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.se">
+<meta name="twitter:description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。 标准函数 with apply run let  data class参数中可定义成员变量、可选参数、命名参数等 apply plugin: ‘kotlin-android-extensions’直接使用id作为view对象，无需findviewbyid 简化lambda表达式123view.s">
 
 
 
@@ -270,8 +270,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
-      <meta itemprop="description" content="爱生活 爱自己 积极向上">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="积极向上">
+      <meta itemprop="image" content="/images/header.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -391,8 +391,9 @@
 <li>with</li>
 <li>apply</li>
 <li>run</li>
-<li>let<h4 id="data-class"><a href="#data-class" class="headerlink" title="data class"></a>data class</h4>参数中可定义成员变量、可选参数、命名参数等</li>
+<li>let</li>
 </ul>
+<h4 id="data-class"><a href="#data-class" class="headerlink" title="data class"></a>data class</h4><p>参数中可定义成员变量、可选参数、命名参数等</p>
 <h4 id="apply-plugin-‘kotlin-android-extensions’"><a href="#apply-plugin-‘kotlin-android-extensions’" class="headerlink" title="apply plugin: ‘kotlin-android-extensions’"></a>apply plugin: ‘kotlin-android-extensions’</h4><p>直接使用id作为view对象，无需findviewbyid</p>
 <h4 id="简化lambda表达式"><a href="#简化lambda表达式" class="headerlink" title="简化lambda表达式"></a>简化lambda表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener &#123;</span><br><span class="line">             ....</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <h5 id="配合RxJava"><a href="#配合RxJava" class="headerlink" title="配合RxJava"></a>配合RxJava</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable.create(ObservableOnSubscribe&lt;Long&gt;&#123;</span><br><span class="line">    Log.e(TAG, &quot;发射 线程为：$&#123;Thread.currentThread().name&#125; &quot;)</span><br><span class="line">    it.onNext(12L)</span><br><span class="line">&#125;)</span><br><span class="line">    .filter &#123;</span><br><span class="line">        Log.e(TAG, &quot;filter 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@filter it &gt; 10</span><br><span class="line">    &#125;</span><br><span class="line">    .subscribeOn(Schedulers.io())</span><br><span class="line">    .map(Function&lt;Long, String&gt; &#123;</span><br><span class="line">        Log.e(TAG, &quot;map 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">        return@Function it.toString()</span><br><span class="line">    &#125;)</span><br><span class="line">    .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">    .subscribe &#123;</span><br><span class="line">        Log.e(TAG, &quot;处理 线程为：$&#123;Thread.currentThread().name&#125; $it &quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -400,7 +401,10 @@
 <li><code>？</code></li>
 <li><code>！！</code></li>
 </ul>
-<h4 id="lateinit"><a href="#lateinit" class="headerlink" title="lateinit"></a>lateinit</h4><p>延迟初始化</p>
+<h4 id="延迟初始化"><a href="#延迟初始化" class="headerlink" title="延迟初始化"></a>延迟初始化</h4><ul>
+<li><code>lateinit</code> 用于修饰<code>var</code> 如果不初始化 会报异常</li>
+<li><code>by laze{}</code> 用于修饰<code>val</code> 变量 在第一次调用的时候会执行其中代码，并返回一个值，之后再调用都只会返回这个值</li>
+</ul>
 <h4 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h4><p>get{} / set{}</p>
 <p><hr><br><strong>详细笔记：</strong></p>
 <ol>
@@ -600,11 +604,11 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
+                src="/images/header.png"
                 alt="Zhaocy" />
             
               <p class="site-author-name" itemprop="name">Zhaocy</p>
-              <p class="site-description motion-element" itemprop="description">爱生活 爱自己 积极向上</p>
+              <p class="site-description motion-element" itemprop="description">积极向上</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -685,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin的几个特性"><span class="nav-number">1.</span> <span class="nav-text">Kotlin的几个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数"><span class="nav-number">1.1.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尾随闭包"><span class="nav-number">1.2.</span> <span class="nav-text">尾随闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准函数"><span class="nav-number">1.3.</span> <span class="nav-text">标准函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data-class"><span class="nav-number">1.4.</span> <span class="nav-text">data class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply-plugin-‘kotlin-android-extensions’"><span class="nav-number">1.5.</span> <span class="nav-text">apply plugin: ‘kotlin-android-extensions’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简化lambda表达式"><span class="nav-number">1.6.</span> <span class="nav-text">简化lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配合RxJava"><span class="nav-number">1.6.1.</span> <span class="nav-text">配合RxJava</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空安全"><span class="nav-number">1.7.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lateinit"><span class="nav-number">1.8.</span> <span class="nav-text">lateinit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#委托属性"><span class="nav-number">1.9.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数-1"><span class="nav-number">1.10.</span> <span class="nav-text">扩展函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展函数-2"><span class="nav-number">2.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambdas"><span class="nav-number">3.</span> <span class="nav-text">Lambdas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number">4.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">5.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托属性-1"><span class="nav-number">6.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合和函数操作符"><span class="nav-number">7.</span> <span class="nav-text">集合和函数操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总数操作符："><span class="nav-number">7.1.</span> <span class="nav-text">总数操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤操作符："><span class="nav-number">7.2.</span> <span class="nav-text">过滤操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射操作符："><span class="nav-number">7.3.</span> <span class="nav-text">映射操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素操作符"><span class="nav-number">7.4.</span> <span class="nav-text">元素操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产操作符"><span class="nav-number">7.5.</span> <span class="nav-text">生产操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序操作符"><span class="nav-number">7.6.</span> <span class="nav-text">顺序操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空安全-1"><span class="nav-number">8.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托模式"><span class="nav-number">9.</span> <span class="nav-text">委托模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number"></span> <span class="nav-text">泛型</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin的几个特性"><span class="nav-number">1.</span> <span class="nav-text">Kotlin的几个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数"><span class="nav-number">1.1.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尾随闭包"><span class="nav-number">1.2.</span> <span class="nav-text">尾随闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准函数"><span class="nav-number">1.3.</span> <span class="nav-text">标准函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data-class"><span class="nav-number">1.4.</span> <span class="nav-text">data class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply-plugin-‘kotlin-android-extensions’"><span class="nav-number">1.5.</span> <span class="nav-text">apply plugin: ‘kotlin-android-extensions’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简化lambda表达式"><span class="nav-number">1.6.</span> <span class="nav-text">简化lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配合RxJava"><span class="nav-number">1.6.1.</span> <span class="nav-text">配合RxJava</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空安全"><span class="nav-number">1.7.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟初始化"><span class="nav-number">1.8.</span> <span class="nav-text">延迟初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#委托属性"><span class="nav-number">1.9.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数-1"><span class="nav-number">1.10.</span> <span class="nav-text">扩展函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展函数-2"><span class="nav-number">2.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambdas"><span class="nav-number">3.</span> <span class="nav-text">Lambdas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number">4.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">5.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托属性-1"><span class="nav-number">6.</span> <span class="nav-text">委托属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合和函数操作符"><span class="nav-number">7.</span> <span class="nav-text">集合和函数操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总数操作符："><span class="nav-number">7.1.</span> <span class="nav-text">总数操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤操作符："><span class="nav-number">7.2.</span> <span class="nav-text">过滤操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射操作符："><span class="nav-number">7.3.</span> <span class="nav-text">映射操作符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素操作符"><span class="nav-number">7.4.</span> <span class="nav-text">元素操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产操作符"><span class="nav-number">7.5.</span> <span class="nav-text">生产操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序操作符"><span class="nav-number">7.6.</span> <span class="nav-text">顺序操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空安全-1"><span class="nav-number">8.</span> <span class="nav-text">空安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托模式"><span class="nav-number">9.</span> <span class="nav-text">委托模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number"></span> <span class="nav-text">泛型</span></a></div>
             
 
           </div>
