@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta name="description" content="Alert弹窗 的一种解决方案需求：在屏幕的最上方弹出一个横条Alert（警告框） 居于StateBar（状态栏）之下 初始的解决方案是直接修改系统的Toast，可以通过反射字段来达到Toast可以交互的目的。但是在Android8.0以上的手机，Toast 的Animation被固定为了淡入淡出，不可以是上滑下滑的动画效果，所以PASS。   Android上的Alert（警告）弹窗，本质上就是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="twitter 登录 分享">
-<meta property="og:url" content="https://o0o0oo00.github.io/2018/09/18/twitter/index.html">
+<meta property="og:title" content="Android上的弹窗及其层级关系协调">
+<meta property="og:url" content="https://o0o0oo00.github.io/2018/12/21/alert/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta property="og:description" content="Alert弹窗 的一种解决方案需求：在屏幕的最上方弹出一个横条Alert（警告框） 居于StateBar（状态栏）之下 初始的解决方案是直接修改系统的Toast，可以通过反射字段来达到Toast可以交互的目的。但是在Android8.0以上的手机，Toast 的Animation被固定为了淡入淡出，不可以是上滑下滑的动画效果，所以PASS。   Android上的Alert（警告）弹窗，本质上就是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T03:11:48.000Z">
+<meta property="og:updated_time" content="2018-12-21T07:27:50.227Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="twitter 登录 分享">
-<meta name="twitter:description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta name="twitter:title" content="Android上的弹窗及其层级关系协调">
+<meta name="twitter:description" content="Alert弹窗 的一种解决方案需求：在屏幕的最上方弹出一个横条Alert（警告框） 居于StateBar（状态栏）之下 初始的解决方案是直接修改系统的Toast，可以通过反射字段来达到Toast可以交互的目的。但是在Android8.0以上的手机，Toast 的Animation被固定为了淡入淡出，不可以是上滑下滑的动画效果，所以PASS。   Android上的Alert（警告）弹窗，本质上就是">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://o0o0oo00.github.io/2018/09/18/twitter/"/>
+  <link rel="canonical" href="https://o0o0oo00.github.io/2018/12/21/alert/"/>
 
 
 
 
 
-  <title>twitter 登录 分享 | Zhaocy</title>
+  <title>Android上的弹窗及其层级关系协调 | Zhaocy</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/09/18/twitter/">
+    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/12/21/alert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
@@ -283,7 +283,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">twitter 登录 分享</h2>
+          <h2 class="post-title" itemprop="name headline">Android上的弹窗及其层级关系协调</h2>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T15:51:54+08:00">
-                2018-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T15:25:19+08:00">
+                2018-12-21
               </time>
             
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  505字
+                  1.2k字
                 </span>
               
 
@@ -365,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2分钟
+                  4分钟
                 </span>
               
             </div>
@@ -386,18 +386,44 @@
       
 
       
-        <h3 id="Twitter-登录"><a href="#Twitter-登录" class="headerlink" title="Twitter 登录"></a>Twitter 登录</h3><h4 id="1、添加依赖："><a href="#1、添加依赖：" class="headerlink" title="1、添加依赖："></a>1、添加依赖：</h4><p><strong>implementation ‘com.twitter.sdk.android:twitter:3.1.1’<br>implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’</strong><br><a id="more"></a></p>
-<h4 id="2、添加KEY-SECRET"><a href="#2、添加KEY-SECRET" class="headerlink" title="2、添加KEY SECRET"></a>2、添加KEY SECRET</h4><p>在value string 文件夹下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string name=&quot;com.twitter.sdk.android.CONSUMER_KEY&quot;&gt;uy0CK2sjygumtE7J445NQB9s4&lt;/string&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string name=&quot;com.twitter.sdk.android.CONSUMER_SECRET&quot;&gt;3bI33NoTXqTGV5JIU0MmVlllqygY55CHWNOXTsTnKiho3MbbPO&lt;/string&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="3、初始化Twitter"><a href="#3、初始化Twitter" class="headerlink" title="3、初始化Twitter"></a>3、初始化Twitter</h4><p>Application 中 <strong>Twitter.initialize(this)</strong></p>
-<h4 id="4、Activity-fragment-的布局中加loggin-button"><a href="#4、Activity-fragment-的布局中加loggin-button" class="headerlink" title="4、Activity / fragment 的布局中加loggin button"></a>4、Activity / fragment 的布局中加loggin button</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.twitter.sdk.android.core.identity.TwitterLoginButton</span><br><span class="line">android:id=&quot;@+id/loginButton&quot;</span><br><span class="line">android:layout_width=&quot;match_parent&quot;</span><br><span class="line">android:layout_height=&quot;wrap_content&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="登录回调"><a href="#登录回调" class="headerlink" title="登录回调"></a>登录回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">loginButton.callback = object : Callback&lt;TwitterSession&gt;() &#123;</span><br><span class="line">override fun success(result: Result&lt;TwitterSession&gt;) &#123;</span><br><span class="line">Toast.makeText(this@MainActivity, &quot;login success&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">override fun failure(exception: TwitterException) &#123;</span><br><span class="line">Toast.makeText(this@MainActivity, &quot;login failure&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="启动logginButton回调"><a href="#启动logginButton回调" class="headerlink" title="启动logginButton回调"></a>启动logginButton回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) &#123;</span><br><span class="line">super.onActivityResult(requestCode, resultCode, data)</span><br><span class="line">loginButton.onActivityResult(requestCode, resultCode, data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="拿到用户信息"><a href="#拿到用户信息" class="headerlink" title="拿到用户信息"></a>拿到用户信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fun requestUser() &#123;</span><br><span class="line">val apiClient = TwitterCore.getInstance().apiClient</span><br><span class="line">val call = apiClient.accountService.verifyCredentials(true, false, true)</span><br><span class="line">call.enqueue(object : Callback&lt;User&gt;() &#123;</span><br><span class="line">override fun success(result: Result&lt;User&gt;) &#123;</span><br><span class="line">Log.e(&quot;123&quot;, result.data?.let &#123;</span><br><span class="line">it.name + it.id + it.idStr</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">override fun failure(exception: TwitterException?) &#123;</span><br><span class="line">Log.e(&quot;123&quot;, &quot;get user failure&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Twitter分享"><a href="#Twitter分享" class="headerlink" title="Twitter分享"></a>Twitter分享</h3><h4 id="两种方式分享"><a href="#两种方式分享" class="headerlink" title="两种方式分享"></a>两种方式分享</h4><h5 id="1、Launching-Twitter-Composer-无回调"><a href="#1、Launching-Twitter-Composer-无回调" class="headerlink" title="1、Launching Twitter Composer 无回调"></a>1、Launching Twitter Composer 无回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">val builder = TweetComposer.Builder(this@MainActivity)</span><br><span class="line">.url(URL(&quot;https://www.google.com/&quot;))</span><br><span class="line">.text(&quot;nice to meet you&quot;)</span><br><span class="line">builder.show()</span><br><span class="line">&#125; catch (e: MalformedURLException) &#123;</span><br><span class="line">e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="2、Twitter-Kit-Native-Composer-有回调"><a href="#2、Twitter-Kit-Native-Composer-有回调" class="headerlink" title="2、Twitter Kit Native Composer 有回调"></a>2、Twitter Kit Native Composer 有回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val session = TwitterCore.getInstance().sessionManager?.activeSession</span><br><span class="line">session?.let &#123;</span><br><span class="line">val intent = ComposerActivity.Builder(this@MainActivity)</span><br><span class="line">.session(session)</span><br><span class="line">.text(&quot;Love where you work&quot;)</span><br><span class="line">.hashtags(&quot;#twitter&quot;)</span><br><span class="line">.createIntent()</span><br><span class="line">startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回调采用的是广播方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class MyResultReceiver : BroadcastReceiver() &#123;</span><br><span class="line">override fun onReceive(context: Context?, intent: Intent) &#123;</span><br><span class="line">if (TweetUploadService.UPLOAD_SUCCESS == intent.action) &#123;</span><br><span class="line">// success Twitter分享成功的回调</span><br><span class="line">Toast.makeText(context, &quot;分享成功的回调&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">val tweetId = intent.extras.getLong(TweetUploadService.EXTRA_TWEET_ID);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">Toast.makeText(context, &quot;分享failure的回调&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">// failure</span><br><span class="line">//            val retryIntent = intent.extras.getParcelable(TweetUploadService.EXTRA_RETRY_INTENT);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注册广播：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver</span><br><span class="line">android:name=&quot;.MyResultReceiver&quot;</span><br><span class="line">android:exported=&quot;false&quot;&gt;</span><br><span class="line">&lt;intent-filter&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS&quot; /&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.UPLOAD_FAILURE&quot; /&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL&quot;/&gt;</span><br><span class="line">&lt;/intent-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="Alert弹窗-的一种解决方案"><a href="#Alert弹窗-的一种解决方案" class="headerlink" title="Alert弹窗 的一种解决方案"></a>Alert弹窗 的一种解决方案</h2><p>需求：在屏幕的最上方弹出一个横条Alert（警告框） 居于StateBar（状态栏）之下</p>
+<p>初始的解决方案是直接修改系统的Toast，可以通过反射字段来达到Toast可以交互的目的。但是在Android8.0以上的手机，Toast 的Animation被固定为了淡入淡出，不可以是上滑下滑的动画效果，所以PASS。  </p>
+<p>Android上的<strong>Alert</strong>（警告）弹窗，<strong>本质上</strong>就是一个<strong>View</strong>。 既然是一个View那么我们完全可以自定义与它的交互效果。  </p>
+<p>下面说几种我想到的解决方案<br><a id="more"></a></p>
+<h3 id="1-普通Alerta"><a href="#1-普通Alerta" class="headerlink" title="1. 普通Alerta"></a>1. 普通Alerta</h3><p>此时只有Activity一个Window，所以不存在层级之间的覆盖关系。<br>直接在<strong>Activity的DecorView上添加AlertView</strong></p>
+<h3 id="2-Activity中存在Dialog的时候"><a href="#2-Activity中存在Dialog的时候" class="headerlink" title="2. Activity中存在Dialog的时候"></a>2. Activity中存在Dialog的时候</h3><p>如果用上面的方法的话，会出现一个问题，Dialog的阴影把我们的Alert弹窗覆盖上了，针对这个问题我们分析一下   </p>
+<p>由于Dialog所属的Window层级为System级别，所以显示优先级高于Activity的Window层级Application</p>
+<h3 id="3-直男解决办法"><a href="#3-直男解决办法" class="headerlink" title="3. 直男解决办法"></a>3. 直男解决办法</h3><p>经过观察发现，可以通过<code>dialog.window.decorView</code>来获取到dialog的DecorView，那么我们是不是可以将我们的AlertView添加到这个decorView之上呢？<br>事实证明是可以的，不过Dialog的Window大小需要调整，此时就遇到了另一个问题。如何将Dialog全屏，以便于Alert可以显示在屏幕的最上方。</p>
+<p>下面粘贴了关键代码（详见<code>BaseFullScreenDialog</code>） + XML布局 双match_parent</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">window?.requestFeature(Window.FEATURE_NO_TITLE)</span><br><span class="line">window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dialog = newDialog()// 创建出dialog对象</span><br><span class="line">dialog.setContentView(view, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))</span><br><span class="line">dialog.window.setBackgroundDrawableResource(android.R.color.transparent)</span><br></pre></td></tr></table></figure>
+<p>这样Dialog全屏的时候我们的Alert果然就显示在了屏幕的最上方！</p>
+<p>不过 <strong>又双叒叕</strong> 引申出另一个问题，如果Dialog中存在输入框，需要弹出输入法，我们知道，默认的dialog在输入法弹出的时候会自动被推上去一段距离，可是我们的dialog已经全屏了啊，此时我又写了一个通用扩展方法<code>dialog.pushDialogAboveSoftInput(root, content)</code>其中计算了输入法高度以及NavigationBar高度，来将Dialog xml布局中的<strong>内容view</strong>手动的推上去一段距离。这才勉强算是完成了需求。擦汗…… </p>
+<p>又双叒叕引申出一些关于NavigationBar的坑就不太好处理了</p>
+<h3 id="4-奇技淫巧解决办法"><a href="#4-奇技淫巧解决办法" class="headerlink" title="4 奇技淫巧解决办法"></a>4 奇技淫巧解决办法</h3><p>我们回归问题的原始，又回到最初的起点……   </p>
+<p>是因为dialog的阴影挡住了我们的Alert所以才要将Alert添加到Dialog的Window上去。那么我们可不可以将Dialog的阴影去掉，换成改变Activity的透明度。岂不是绕过了上面的所有问题。☆´∀｀☆</p>
+<p>首先应该设置dialog弹出时候背景不变黑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dialog.window.setDimAmount(0F)</span><br></pre></td></tr></table></figure>
+<p>分别在dialog的show 和 dismiss方法中去改变Activity的透明度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 黑暗 0.0F ~ 1.0F 透明</span><br><span class="line">fun Context.setBackgroundAlpha(alpha: Float) &#123;</span><br><span class="line">    val act = this as? Activity ?: return</span><br><span class="line">    val attributes = act.window.attributes</span><br><span class="line">    attributes.alpha = alpha</span><br><span class="line">    act.window.attributes = attributes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就把问题控制在了AlertView的层级上了，只需要配合WindowManager，就可以实现Alert不会被背景阴影挡住了。</p>
+<h3 id="5-WindowManager-设置Alert层级"><a href="#5-WindowManager-设置Alert层级" class="headerlink" title="5. WindowManager 设置Alert层级"></a>5. WindowManager 设置Alert层级</h3><p>(╥﹏╥…) </p>
+<p>我们知道Window的显示是有层级顺序的，层级高的覆盖在层级低的Window之上。<br>Activity的层级为 <code>TYPE_APPLICATION</code><br>PopupWindow的层级为<code>TYPE_APPLICATION_PANEL</code><br>而我们只需要添加一个层级为<code>TYPE_APPLICATION_SUB_PANEL</code>的View到Window上面即可</p>
+<blockquote>
+<p>These windows are displayed on top their attached window and any{@link #TYPE_APPLICATION_PANEL} panels.</p>
+</blockquote>
+<p>关于层级顺序详见SDK WindowManager.java</p>
+<p><strong>注!!!</strong><br>使用WindowManager如果是在<strong>层级为2000<code>FIRST_SYSTEM_WINDOW</code></strong>以下的是<strong>不需要</strong>申请弹窗权限的。</p>
+<p>而这种创建出来的Window是依附于Activity的，如果界面被销毁，或者还没有初始化就去使用WindowManager来<code>addView</code>或者<code>removeView</code>会报异常<code>view not attached to window</code></p>
+<p>针对这个问题，做如下控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if ((act as? Activity)?.isFinishing == true) &#123;</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">windowManager.addView(root, layoutParams)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Handler().postDelayed(&#123;</span><br><span class="line">    if (root.isAttachedToWindow &amp;&amp; act?.isFinishing != true) &#123;</span><br><span class="line">        windowManager.removeView(root)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, DURATION_ANIM)</span><br></pre></td></tr></table></figure>
+<p>以及关联Application 的 <code>registerActivityLifecycleCallbacks</code>生命周期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">override fun onActivityDestroyed(activity: Activity?) &#123;</span><br><span class="line">    if (root.isAttachedToWindow) &#123;</span><br><span class="line">        windowManager.removeView(root)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-特殊问题"><a href="#6-特殊问题" class="headerlink" title="6 特殊问题"></a>6 特殊问题</h3><p>在one plus 的 9.0 系统上面 windowManager添加顶部Alert会<strong>被statebar遮挡一部分</strong>  </p>
+<p>解决办法：给WindowManager.LayoutParams添加如下FLAG</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or // 不获取焦点，以便于在弹出的时候 下层界面仍然可以进行操作</span><br><span class="line">        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or</span><br><span class="line">        WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR // 确保你的内容不会被装饰物(如状态栏)掩盖.</span><br></pre></td></tr></table></figure>
+<h3 id="干脆Dialog都不用了直接用PopupWindow"><a href="#干脆Dialog都不用了直接用PopupWindow" class="headerlink" title="干脆Dialog都不用了直接用PopupWindow"></a>干脆Dialog都不用了直接用PopupWindow</h3><p>我们知道popWindow是与Activity共用同一个Window的，这一点上来讲，非常好控制，配合WindowManager 完全可以实现需求。</p>
+<p><a href="https://github.com/o0o0oo00/NewToast" target="_blank" rel="noopener">代码</a></p>
 
       
     </div>
@@ -430,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/17/blog/" rel="next" title="Meet Kotlin">
-                <i class="fa fa-chevron-left"></i> Meet Kotlin
+              <a href="/2018/12/18/decoration/" rel="next" title="RecyclerView.ItemDecoration() 的用法与技巧">
+                <i class="fa fa-chevron-left"></i> RecyclerView.ItemDecoration() 的用法与技巧
               </a>
             
           </div>
@@ -439,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/21/2018-9-21-秋高气爽/" rel="prev" title="2018.9.21 秋高气爽">
-                2018.9.21 秋高气爽 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -597,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter-登录"><span class="nav-number">1.</span> <span class="nav-text">Twitter 登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、添加依赖："><span class="nav-number">1.1.</span> <span class="nav-text">1、添加依赖：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、添加KEY-SECRET"><span class="nav-number">1.2.</span> <span class="nav-text">2、添加KEY SECRET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、初始化Twitter"><span class="nav-number">1.3.</span> <span class="nav-text">3、初始化Twitter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Activity-fragment-的布局中加loggin-button"><span class="nav-number">1.4.</span> <span class="nav-text">4、Activity / fragment 的布局中加loggin button</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#登录回调"><span class="nav-number">1.4.1.</span> <span class="nav-text">登录回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动logginButton回调"><span class="nav-number">1.4.2.</span> <span class="nav-text">启动logginButton回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拿到用户信息"><span class="nav-number">1.4.3.</span> <span class="nav-text">拿到用户信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter分享"><span class="nav-number">2.</span> <span class="nav-text">Twitter分享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两种方式分享"><span class="nav-number">2.1.</span> <span class="nav-text">两种方式分享</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、Launching-Twitter-Composer-无回调"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、Launching Twitter Composer 无回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、Twitter-Kit-Native-Composer-有回调"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、Twitter Kit Native Composer 有回调</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alert弹窗-的一种解决方案"><span class="nav-number">1.</span> <span class="nav-text">Alert弹窗 的一种解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-普通Alerta"><span class="nav-number">1.1.</span> <span class="nav-text">1. 普通Alerta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Activity中存在Dialog的时候"><span class="nav-number">1.2.</span> <span class="nav-text">2. Activity中存在Dialog的时候</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-直男解决办法"><span class="nav-number">1.3.</span> <span class="nav-text">3. 直男解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-奇技淫巧解决办法"><span class="nav-number">1.4.</span> <span class="nav-text">4 奇技淫巧解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-WindowManager-设置Alert层级"><span class="nav-number">1.5.</span> <span class="nav-text">5. WindowManager 设置Alert层级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-特殊问题"><span class="nav-number">1.6.</span> <span class="nav-text">6 特殊问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#干脆Dialog都不用了直接用PopupWindow"><span class="nav-number">1.7.</span> <span class="nav-text">干脆Dialog都不用了直接用PopupWindow</span></a></li></ol></li></ol></div>
             
 
           </div>
