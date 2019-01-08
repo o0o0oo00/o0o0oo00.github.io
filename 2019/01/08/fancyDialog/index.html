@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="技术," />
 
 
 
@@ -79,17 +79,24 @@
 
 
 
-<meta name="description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta name="description" content="FancyDialogDSL风格代替Builder模式什么是DSLdomain specific language / DSLJava使用Builder来构建复杂对象。而Kotlin配合lambad 使用DSL风格 将使复杂对象的构建更加可读，更清晰，更简洁 首先我们要明白lambda的几个特性  如果lambda是函数的最后一个参数，可以放在括号外面 如果lambda是函数的唯一参数，它可以放在">
+<meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="twitter 登录 分享">
-<meta property="og:url" content="https://o0o0oo00.github.io/2018/09/18/twitter/index.html">
+<meta property="og:title" content="DSL风格代替Builder模式 fancyDialog">
+<meta property="og:url" content="https://o0o0oo00.github.io/2019/01/08/fancyDialog/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta property="og:description" content="FancyDialogDSL风格代替Builder模式什么是DSLdomain specific language / DSLJava使用Builder来构建复杂对象。而Kotlin配合lambad 使用DSL风格 将使复杂对象的构建更加可读，更清晰，更简洁 首先我们要明白lambda的几个特性  如果lambda是函数的最后一个参数，可以放在括号外面 如果lambda是函数的唯一参数，它可以放在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T03:11:48.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163051.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163103.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163121.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163127.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90108-153438.jpg">
+<meta property="og:updated_time" content="2019-01-08T09:55:00.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="twitter 登录 分享">
-<meta name="twitter:description" content="Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’">
+<meta name="twitter:title" content="DSL风格代替Builder模式 fancyDialog">
+<meta name="twitter:description" content="FancyDialogDSL风格代替Builder模式什么是DSLdomain specific language / DSLJava使用Builder来构建复杂对象。而Kotlin配合lambad 使用DSL风格 将使复杂对象的构建更加可读，更清晰，更简洁 首先我们要明白lambda的几个特性  如果lambda是函数的最后一个参数，可以放在括号外面 如果lambda是函数的唯一参数，它可以放在">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163051.jpg">
 
 
 
@@ -119,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://o0o0oo00.github.io/2018/09/18/twitter/"/>
+  <link rel="canonical" href="https://o0o0oo00.github.io/2019/01/08/fancyDialog/"/>
 
 
 
 
 
-  <title>twitter 登录 分享 | Zhaocy</title>
+  <title>DSL风格代替Builder模式 fancyDialog | Zhaocy</title>
   
 
 
@@ -266,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2018/09/18/twitter/">
+    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2019/01/08/fancyDialog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
@@ -283,7 +290,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">twitter 登录 分享</h2>
+          <h2 class="post-title" itemprop="name headline">DSL风格代替Builder模式 fancyDialog</h2>
         
 
         <div class="post-meta">
@@ -295,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T15:51:54+08:00">
-                2018-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T17:47:15+08:00">
+                2019-01-08
               </time>
             
 
@@ -349,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  505字
+                  476字
                 </span>
               
 
@@ -386,18 +393,31 @@
       
 
       
-        <h3 id="Twitter-登录"><a href="#Twitter-登录" class="headerlink" title="Twitter 登录"></a>Twitter 登录</h3><h4 id="1、添加依赖："><a href="#1、添加依赖：" class="headerlink" title="1、添加依赖："></a>1、添加依赖：</h4><p><strong>implementation ‘com.twitter.sdk.android:twitter:3.1.1’<br>implementation ‘com.twitter.sdk.android:tweet-composer:3.1.1’</strong><br><a id="more"></a></p>
-<h4 id="2、添加KEY-SECRET"><a href="#2、添加KEY-SECRET" class="headerlink" title="2、添加KEY SECRET"></a>2、添加KEY SECRET</h4><p>在value string 文件夹下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string name=&quot;com.twitter.sdk.android.CONSUMER_KEY&quot;&gt;uy0CK2sjygumtE7J445NQB9s4&lt;/string&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;string name=&quot;com.twitter.sdk.android.CONSUMER_SECRET&quot;&gt;3bI33NoTXqTGV5JIU0MmVlllqygY55CHWNOXTsTnKiho3MbbPO&lt;/string&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="3、初始化Twitter"><a href="#3、初始化Twitter" class="headerlink" title="3、初始化Twitter"></a>3、初始化Twitter</h4><p>Application 中 <strong>Twitter.initialize(this)</strong></p>
-<h4 id="4、Activity-fragment-的布局中加loggin-button"><a href="#4、Activity-fragment-的布局中加loggin-button" class="headerlink" title="4、Activity / fragment 的布局中加loggin button"></a>4、Activity / fragment 的布局中加loggin button</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.twitter.sdk.android.core.identity.TwitterLoginButton</span><br><span class="line">android:id=&quot;@+id/loginButton&quot;</span><br><span class="line">android:layout_width=&quot;match_parent&quot;</span><br><span class="line">android:layout_height=&quot;wrap_content&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="登录回调"><a href="#登录回调" class="headerlink" title="登录回调"></a>登录回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">loginButton.callback = object : Callback&lt;TwitterSession&gt;() &#123;</span><br><span class="line">override fun success(result: Result&lt;TwitterSession&gt;) &#123;</span><br><span class="line">Toast.makeText(this@MainActivity, &quot;login success&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">override fun failure(exception: TwitterException) &#123;</span><br><span class="line">Toast.makeText(this@MainActivity, &quot;login failure&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="启动logginButton回调"><a href="#启动logginButton回调" class="headerlink" title="启动logginButton回调"></a>启动logginButton回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) &#123;</span><br><span class="line">super.onActivityResult(requestCode, resultCode, data)</span><br><span class="line">loginButton.onActivityResult(requestCode, resultCode, data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="拿到用户信息"><a href="#拿到用户信息" class="headerlink" title="拿到用户信息"></a>拿到用户信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fun requestUser() &#123;</span><br><span class="line">val apiClient = TwitterCore.getInstance().apiClient</span><br><span class="line">val call = apiClient.accountService.verifyCredentials(true, false, true)</span><br><span class="line">call.enqueue(object : Callback&lt;User&gt;() &#123;</span><br><span class="line">override fun success(result: Result&lt;User&gt;) &#123;</span><br><span class="line">Log.e(&quot;123&quot;, result.data?.let &#123;</span><br><span class="line">it.name + it.id + it.idStr</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">override fun failure(exception: TwitterException?) &#123;</span><br><span class="line">Log.e(&quot;123&quot;, &quot;get user failure&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Twitter分享"><a href="#Twitter分享" class="headerlink" title="Twitter分享"></a>Twitter分享</h3><h4 id="两种方式分享"><a href="#两种方式分享" class="headerlink" title="两种方式分享"></a>两种方式分享</h4><h5 id="1、Launching-Twitter-Composer-无回调"><a href="#1、Launching-Twitter-Composer-无回调" class="headerlink" title="1、Launching Twitter Composer 无回调"></a>1、Launching Twitter Composer 无回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">val builder = TweetComposer.Builder(this@MainActivity)</span><br><span class="line">.url(URL(&quot;https://www.google.com/&quot;))</span><br><span class="line">.text(&quot;nice to meet you&quot;)</span><br><span class="line">builder.show()</span><br><span class="line">&#125; catch (e: MalformedURLException) &#123;</span><br><span class="line">e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="2、Twitter-Kit-Native-Composer-有回调"><a href="#2、Twitter-Kit-Native-Composer-有回调" class="headerlink" title="2、Twitter Kit Native Composer 有回调"></a>2、Twitter Kit Native Composer 有回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val session = TwitterCore.getInstance().sessionManager?.activeSession</span><br><span class="line">session?.let &#123;</span><br><span class="line">val intent = ComposerActivity.Builder(this@MainActivity)</span><br><span class="line">.session(session)</span><br><span class="line">.text(&quot;Love where you work&quot;)</span><br><span class="line">.hashtags(&quot;#twitter&quot;)</span><br><span class="line">.createIntent()</span><br><span class="line">startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回调采用的是广播方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class MyResultReceiver : BroadcastReceiver() &#123;</span><br><span class="line">override fun onReceive(context: Context?, intent: Intent) &#123;</span><br><span class="line">if (TweetUploadService.UPLOAD_SUCCESS == intent.action) &#123;</span><br><span class="line">// success Twitter分享成功的回调</span><br><span class="line">Toast.makeText(context, &quot;分享成功的回调&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">val tweetId = intent.extras.getLong(TweetUploadService.EXTRA_TWEET_ID);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">Toast.makeText(context, &quot;分享failure的回调&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">// failure</span><br><span class="line">//            val retryIntent = intent.extras.getParcelable(TweetUploadService.EXTRA_RETRY_INTENT);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注册广播：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver</span><br><span class="line">android:name=&quot;.MyResultReceiver&quot;</span><br><span class="line">android:exported=&quot;false&quot;&gt;</span><br><span class="line">&lt;intent-filter&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS&quot; /&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.UPLOAD_FAILURE&quot; /&gt;</span><br><span class="line">&lt;action android:name=&quot;com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL&quot;/&gt;</span><br><span class="line">&lt;/intent-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="FancyDialog"><a href="#FancyDialog" class="headerlink" title="FancyDialog"></a>FancyDialog</h1><h2 id="DSL风格代替Builder模式"><a href="#DSL风格代替Builder模式" class="headerlink" title="DSL风格代替Builder模式"></a>DSL风格代替Builder模式</h2><h3 id="什么是DSL"><a href="#什么是DSL" class="headerlink" title="什么是DSL"></a>什么是DSL</h3><p>domain specific language / DSL<br>Java使用Builder来构建复杂对象。<br>而Kotlin配合lambad 使用DSL风格 将使复杂对象的构建更加可读，更清晰，更简洁</p>
+<p>首先我们要明白<code>lambda</code>的几个特性</p>
+<ul>
+<li>如果<code>lambda</code>是函数的最后一个参数，可以放在<strong>括号外面</strong></li>
+<li>如果<code>lambda</code>是函数的唯一参数，它可以放在<strong>括号外面</strong>并且<strong>省略括号</strong></li>
+<li>指定接收者的<code>lambda</code></li>
+</ul>
+<p>通过<code>apply(block)</code> 来配置dialog所需要的参数。而不需要通过不断的<code>.setXXX</code>来设置</p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//  DSL style</span><br><span class="line">inline fun askDialog(fragmentManager: FragmentManager, dsl: AskDialog.() -&gt; Unit) &#123;</span><br><span class="line">    AskDialog.newInstance().apply(dsl).show(fragmentManager, &quot;dialog&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用姿势</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">askDialog(supportFragmentManager) &#123;</span><br><span class="line">    mTitle = &quot;标题&quot;</span><br><span class="line">    mMessage = &quot;内容&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面提供几种常见的dialog使用形式</p>
+<a id="more"></a>
+<h3 id="askDialog"><a href="#askDialog" class="headerlink" title="askDialog"></a>askDialog</h3><h4 id="normal"><a href="#normal" class="headerlink" title="normal"></a>normal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">askDialog(supportFragmentManager) &#123;</span><br><span class="line">    mTitle = &quot;标题&quot;</span><br><span class="line">    sureClick &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;sure&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">    cancelClick &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;cancel&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163051.jpg" width="20%" height="20%"></p>
+<h4 id="onlySure"><a href="#onlySure" class="headerlink" title="onlySure"></a>onlySure</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">askDialog(supportFragmentManager) &#123;</span><br><span class="line">    mTitle = &quot;标题&quot;</span><br><span class="line">    mMessage = &quot;摘要vv摘要摘要摘要摘要摘要&quot;</span><br><span class="line">    mGravity = Gravity.TOP</span><br><span class="line">    onlySure = true</span><br><span class="line">    sureClick &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;sure&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163103.jpg" width="20%" height="20%"></p>
+<h3 id="askMoreDialog"><a href="#askMoreDialog" class="headerlink" title="askMoreDialog"></a>askMoreDialog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">askMoreDialog(supportFragmentManager) &#123;</span><br><span class="line">    mTitle = &quot;标题&quot;</span><br><span class="line">    mMessage = &quot;摘要vv摘要摘要摘要摘要摘要摘要vv摘要摘要摘要摘要摘要&quot;</span><br><span class="line">    mColor = Color.RED</span><br><span class="line">    sureClick(key = &quot;第一个&quot;) &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;第一个&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">    cancelClick(key = &quot;第二个&quot;) &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;第二个&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">    button3Clicks(key = &quot;第三个&quot;, color = Color.GRAY) &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, &quot;第三个&quot;, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163121.jpg" width="20%" height="20%"></p>
+<h3 id="editDialog"><a href="#editDialog" class="headerlink" title="editDialog"></a>editDialog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">editDialog(supportFragmentManager) &#123;</span><br><span class="line">    rightClick &#123;</span><br><span class="line">        Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90102-163127.jpg" width="20%" height="20%"></p>
+<h3 id="listDialog"><a href="#listDialog" class="headerlink" title="listDialog"></a>listDialog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">lateinit var dialog: ListDialog</span><br><span class="line">val listener = object : ClickListener &#123;</span><br><span class="line">    override fun onItemLongClick(position: Int, v: View) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onItemClick(position: Int, v: View) &#123;</span><br><span class="line">        dialog.dismiss()</span><br><span class="line">        Toast.makeText(this@MainActivity, (v.tag as String), Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">dialog = listDialog &#123;</span><br><span class="line">    listSetting(listener) &#123;</span><br><span class="line">        add(&quot;第一头条&quot;)</span><br><span class="line">        add(&quot;第二头条&quot;)</span><br><span class="line">        add(&quot;_(:з」∠)_&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">dialog.show(supportFragmentManager,&quot;dialog&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/o0o0oo00/FancyDialog/master/mdimage/S90108-153438.jpg" width="20%" height="20%"></p>
+<h3 id="customDialog"><a href="#customDialog" class="headerlink" title="customDialog"></a>customDialog</h3><p>待续…</p>
 
       
     </div>
@@ -421,6 +441,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
 
       
       
@@ -430,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/17/blog/" rel="next" title="Meet Kotlin">
-                <i class="fa fa-chevron-left"></i> Meet Kotlin
+              <a href="/2019/01/03/AndroidProblem/" rel="next" title="Android疑难问题总结">
+                <i class="fa fa-chevron-left"></i> Android疑难问题总结
               </a>
             
           </div>
@@ -439,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/21/2018-9-21-秋高气爽/" rel="prev" title="2018.9.21 秋高气爽">
-                2018.9.21 秋高气爽 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -597,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter-登录"><span class="nav-number">1.</span> <span class="nav-text">Twitter 登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、添加依赖："><span class="nav-number">1.1.</span> <span class="nav-text">1、添加依赖：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、添加KEY-SECRET"><span class="nav-number">1.2.</span> <span class="nav-text">2、添加KEY SECRET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、初始化Twitter"><span class="nav-number">1.3.</span> <span class="nav-text">3、初始化Twitter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Activity-fragment-的布局中加loggin-button"><span class="nav-number">1.4.</span> <span class="nav-text">4、Activity / fragment 的布局中加loggin button</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#登录回调"><span class="nav-number">1.4.1.</span> <span class="nav-text">登录回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动logginButton回调"><span class="nav-number">1.4.2.</span> <span class="nav-text">启动logginButton回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拿到用户信息"><span class="nav-number">1.4.3.</span> <span class="nav-text">拿到用户信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter分享"><span class="nav-number">2.</span> <span class="nav-text">Twitter分享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两种方式分享"><span class="nav-number">2.1.</span> <span class="nav-text">两种方式分享</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、Launching-Twitter-Composer-无回调"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、Launching Twitter Composer 无回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、Twitter-Kit-Native-Composer-有回调"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、Twitter Kit Native Composer 有回调</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FancyDialog"><span class="nav-number">1.</span> <span class="nav-text">FancyDialog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DSL风格代替Builder模式"><span class="nav-number">1.1.</span> <span class="nav-text">DSL风格代替Builder模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DSL"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么是DSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#askDialog"><span class="nav-number">1.1.2.</span> <span class="nav-text">askDialog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#normal"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">normal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onlySure"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">onlySure</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#askMoreDialog"><span class="nav-number">1.1.3.</span> <span class="nav-text">askMoreDialog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#editDialog"><span class="nav-number">1.1.4.</span> <span class="nav-text">editDialog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#listDialog"><span class="nav-number">1.1.5.</span> <span class="nav-text">listDialog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#customDialog"><span class="nav-number">1.1.6.</span> <span class="nav-text">customDialog</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
