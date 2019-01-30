@@ -542,7 +542,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  90字
+                  185字
                 </span>
               
 
@@ -584,7 +584,6 @@
 <p>使用WindowManager的时候 我们在<code>removeView(view)</code>的时候 会事先判断<code>view.isAttachedToWindow</code>  而我遇到的问题是，我再<code>removeView(view)</code>之后再去判断<code>view.isAttachedToWindow</code> 其值仍然为<strong>true</strong> ,这就令我很是费解。  </p>
 <h5 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h5><p><code>windowManager.removeViewImmediate(view)</code>之后我们再去判断<code>view.isAttachedToWindow</code> 其值就变成了<strong>false</strong></p>
 <hr>
-<p>持续更新…<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/03/AndroidProblem/#more" rel="contents">
