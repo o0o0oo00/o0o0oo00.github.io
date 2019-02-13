@@ -351,7 +351,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k字
+                  1.1k字
                 </span>
               
 
@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  4分钟
                 </span>
               
             </div>
@@ -390,7 +390,8 @@
       
         
           
-            <h3 id="Jetpack-全家桶"><a href="#Jetpack-全家桶" class="headerlink" title="Jetpack 全家桶"></a>Jetpack 全家桶</h3><h4 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h4><p><strong><code>Lifecycle</code></strong> 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。</p>
+            <h3 id="Jetpack-全家桶"><a href="#Jetpack-全家桶" class="headerlink" title="Jetpack 全家桶"></a>Jetpack 全家桶</h3><h4 id="DataBinding"><a href="#DataBinding" class="headerlink" title="DataBinding"></a>DataBinding</h4><p><a href="https://o0o0oo00.github.io/2019/02/11/databinding/#more">单项绑定</a><br>双向绑定 我们知道 正常的情况下是数据驱动视图，也就是数据改变了，UI也会跟着更新，但是如果是一个EditText 输入框中的内容改变了，我们的数据是不会跟着改变的，这就引申出了<strong>双向绑定</strong> UI视图的变化也会驱动数据的改变，</p>
+<h4 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h4><p><strong><code>Lifecycle</code></strong> 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。</p>
 <h5 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h5><ul>
 <li>在UIController（Activity/Fragment）中添加<strong>观察者</strong><code>getLifecycle().addObserver(mPresenter);//添加LifecycleObserver</code></li>
 <li>在外部的一个类去实现<code>LifecycleObserver</code> 进而就可以去监听到UIController 的各个生命周期的状态改变了。</li>

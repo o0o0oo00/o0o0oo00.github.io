@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Jetpack 全家桶LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。 使用方式： 在UIController（Activity/Fragment）中添加观察者getLifecycle().addObserver(mPresenter);//添加LifecycleObserver 在外部的一">
+<meta name="description" content="Jetpack 全家桶DataBinding单项绑定双向绑定 我们知道 正常的情况下是数据驱动视图，也就是数据改变了，UI也会跟着更新，但是如果是一个EditText 输入框中的内容改变了，我们的数据是不会跟着改变的，这就引申出了双向绑定 UI视图的变化也会驱动数据的改变， LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信">
 <meta name="keywords" content="Jetpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jetpack 全家桶">
 <meta property="og:url" content="https://o0o0oo00.github.io/2019/02/12/jetpack/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="Jetpack 全家桶LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。 使用方式： 在UIController（Activity/Fragment）中添加观察者getLifecycle().addObserver(mPresenter);//添加LifecycleObserver 在外部的一">
+<meta property="og:description" content="Jetpack 全家桶DataBinding单项绑定双向绑定 我们知道 正常的情况下是数据驱动视图，也就是数据改变了，UI也会跟着更新，但是如果是一个EditText 输入框中的内容改变了，我们的数据是不会跟着改变的，这就引申出了双向绑定 UI视图的变化也会驱动数据的改变， LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-12T09:06:01.236Z">
+<meta property="og:updated_time" content="2019-02-13T02:40:25.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jetpack 全家桶">
-<meta name="twitter:description" content="Jetpack 全家桶LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。 使用方式： 在UIController（Activity/Fragment）中添加观察者getLifecycle().addObserver(mPresenter);//添加LifecycleObserver 在外部的一">
+<meta name="twitter:description" content="Jetpack 全家桶DataBinding单项绑定双向绑定 我们知道 正常的情况下是数据驱动视图，也就是数据改变了，UI也会跟着更新，但是如果是一个EditText 输入框中的内容改变了，我们的数据是不会跟着改变的，这就引申出了双向绑定 UI视图的变化也会驱动数据的改变， LifecycleLifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信">
 
 
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k字
+                  1.1k字
                 </span>
               
 
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  4分钟
                 </span>
               
             </div>
@@ -387,7 +387,8 @@
       
 
       
-        <h3 id="Jetpack-全家桶"><a href="#Jetpack-全家桶" class="headerlink" title="Jetpack 全家桶"></a>Jetpack 全家桶</h3><h4 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h4><p><strong><code>Lifecycle</code></strong> 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。</p>
+        <h3 id="Jetpack-全家桶"><a href="#Jetpack-全家桶" class="headerlink" title="Jetpack 全家桶"></a>Jetpack 全家桶</h3><h4 id="DataBinding"><a href="#DataBinding" class="headerlink" title="DataBinding"></a>DataBinding</h4><p><a href="https://o0o0oo00.github.io/2019/02/11/databinding/#more">单项绑定</a><br>双向绑定 我们知道 正常的情况下是数据驱动视图，也就是数据改变了，UI也会跟着更新，但是如果是一个EditText 输入框中的内容改变了，我们的数据是不会跟着改变的，这就引申出了<strong>双向绑定</strong> UI视图的变化也会驱动数据的改变，</p>
+<h4 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h4><p><strong><code>Lifecycle</code></strong> 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。</p>
 <h5 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h5><ul>
 <li>在UIController（Activity/Fragment）中添加<strong>观察者</strong><code>getLifecycle().addObserver(mPresenter);//添加LifecycleObserver</code></li>
 <li>在外部的一个类去实现<code>LifecycleObserver</code> 进而就可以去监听到UIController 的各个生命周期的状态改变了。</li>
@@ -640,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jetpack-全家桶"><span class="nav-number">1.</span> <span class="nav-text">Jetpack 全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lifecycle"><span class="nav-number">1.1.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式："><span class="nav-number">1.1.1.</span> <span class="nav-text">使用方式：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#原理以及重要的类"><span class="nav-number">1.1.2.</span> <span class="nav-text">原理以及重要的类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewModel"><span class="nav-number">1.2.</span> <span class="nav-text">ViewModel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LiveData"><span class="nav-number">1.3.</span> <span class="nav-text">LiveData</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Paging"><span class="nav-number">1.4.</span> <span class="nav-text">Paging</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jetpack-全家桶"><span class="nav-number">1.</span> <span class="nav-text">Jetpack 全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DataBinding"><span class="nav-number">1.1.</span> <span class="nav-text">DataBinding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lifecycle"><span class="nav-number">1.2.</span> <span class="nav-text">Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式："><span class="nav-number">1.2.1.</span> <span class="nav-text">使用方式：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#原理以及重要的类"><span class="nav-number">1.2.2.</span> <span class="nav-text">原理以及重要的类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewModel"><span class="nav-number">1.3.</span> <span class="nav-text">ViewModel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LiveData"><span class="nav-number">1.4.</span> <span class="nav-text">LiveData</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Paging"><span class="nav-number">1.5.</span> <span class="nav-text">Paging</span></a></li></ol></li></ol></div>
             
 
           </div>
