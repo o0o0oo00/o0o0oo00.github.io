@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="DataBinding," />
+  <meta name="keywords" content="Jetpack," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="DataBinding因为DataBinding相关的Gradle默认是不开启的，但是确实存在系统中，所以手动去打开它。在app的目录下面 android{}里面加上这句开启命令。 123dataBinding &amp;#123;    enabled = true&amp;#125;">
-<meta name="keywords" content="DataBinding">
+<meta name="description" content="Navigation先介绍概念在举一个栗子 优势 自动处理fragment transactions 正确处理 up and back 动画和过度的默认行为 Deep linking as a first class operation // 咋翻译啊？ 仅用少量代码实现 navigation UI patterns (like navigation drawers and bottom nav)">
+<meta name="keywords" content="Jetpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DataBinding &amp; MVVM">
-<meta property="og:url" content="https://o0o0oo00.github.io/2019/02/11/databinding/index.html">
+<meta property="og:title" content="Jetpack Navigation">
+<meta property="og:url" content="https://o0o0oo00.github.io/2019/02/13/Navigation/index.html">
 <meta property="og:site_name" content="Zhaocy">
-<meta property="og:description" content="DataBinding因为DataBinding相关的Gradle默认是不开启的，但是确实存在系统中，所以手动去打开它。在app的目录下面 android{}里面加上这句开启命令。 123dataBinding &amp;#123;    enabled = true&amp;#125;">
+<meta property="og:description" content="Navigation先介绍概念在举一个栗子 优势 自动处理fragment transactions 正确处理 up and back 动画和过度的默认行为 Deep linking as a first class operation // 咋翻译啊？ 仅用少量代码实现 navigation UI patterns (like navigation drawers and bottom nav)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-11T11:18:56.760Z">
+<meta property="og:updated_time" content="2019-02-14T02:03:36.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DataBinding &amp; MVVM">
-<meta name="twitter:description" content="DataBinding因为DataBinding相关的Gradle默认是不开启的，但是确实存在系统中，所以手动去打开它。在app的目录下面 android{}里面加上这句开启命令。 123dataBinding &amp;#123;    enabled = true&amp;#125;">
+<meta name="twitter:title" content="Jetpack Navigation">
+<meta name="twitter:description" content="Navigation先介绍概念在举一个栗子 优势 自动处理fragment transactions 正确处理 up and back 动画和过度的默认行为 Deep linking as a first class operation // 咋翻译啊？ 仅用少量代码实现 navigation UI patterns (like navigation drawers and bottom nav)">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://o0o0oo00.github.io/2019/02/11/databinding/"/>
+  <link rel="canonical" href="https://o0o0oo00.github.io/2019/02/13/Navigation/"/>
 
 
 
 
 
-  <title>DataBinding & MVVM | Zhaocy</title>
+  <title>Jetpack Navigation | Zhaocy</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2019/02/11/databinding/">
+    <link itemprop="mainEntityOfPage" href="https://o0o0oo00.github.io/2019/02/13/Navigation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhaocy">
@@ -284,7 +284,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">DataBinding & MVVM</h2>
+          <h2 class="post-title" itemprop="name headline">Jetpack Navigation</h2>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T16:18:01+08:00">
-                2019-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T15:28:38+08:00">
+                2019-02-13
               </time>
             
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  730字
+                  514字
                 </span>
               
 
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  2分钟
                 </span>
               
             </div>
@@ -387,29 +387,43 @@
       
 
       
-        <h3 id="DataBinding"><a href="#DataBinding" class="headerlink" title="DataBinding"></a>DataBinding</h3><p>因为DataBinding相关的Gradle默认是不开启的，但是确实存在系统中，所以手动去打开它。<br>在app的目录下面 <strong><code>android{}</code></strong>里面加上这句开启命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataBinding &#123;</span><br><span class="line">    enabled = true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h4 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;data&gt;</span><br><span class="line">        &lt;variable</span><br><span class="line">            name=&quot;person&quot;</span><br><span class="line">            type=&quot;com.zcy.nidavellir.mydatabinding.Person&quot; /&gt;</span><br><span class="line">    &lt;/data&gt;</span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;person.name&#125;&quot; /&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;person.age&#125;&quot; /&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/layout&gt;</span><br></pre></td></tr></table></figure>
-<p>定义了一个形式变量<strong><code>person</code></strong> 然后可以在view中直接引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class MainActivity : AppCompatActivity() &#123;</span><br><span class="line">    override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        val binding = DataBindingUtil.setContentView&lt;com.zcy.nidavellir.mydatabinding.databinding.ActivityMainBinding&gt;(this, R.layout.activity_main)</span><br><span class="line">        binding.person = Person(&quot;只是&quot;,&quot;123&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里使用了<strong><code>DataBindingUtil.setContentView</code></strong>来代替 <code>setContentView</code></p>
-<p>而泛型中的<code>ActivityMainBinding</code> 则为xml文件名的大驼峰命名转换加上Binding组成。</p>
-<p>进而通过<code>binding</code>来赋值xml文件中的<code>person</code>变量</p>
-<p>非常的简洁 ヾ(=･ω･=)o  </p>
-<p>如果<code>person</code>有一个属性<code>val like: ObservableInt</code> 那么更改这个属性，会自动更新UI。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun click(v: View) &#123;</span><br><span class="line">	person.like.set(person.like.get() + 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意！</strong> 如果含有<code>ImageView</code>且引用了<code>R.drawable.xxx</code> 那么还需要在<code>data</code>标签中加上<br><strong><code>&lt;import type=&quot;com.zcy.nidavellir.mydatabinding.R&quot;/&gt;</code></strong></p>
-<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><h4 id="Model层"><a href="#Model层" class="headerlink" title="Model层"></a>Model层</h4><p>负责数据的存储、网络请求、数据库以及I/O操作</p>
-<h4 id="View层"><a href="#View层" class="headerlink" title="View层"></a>View层</h4><p>View层做的仅仅和UI相关的工作，View层不做任何业务逻辑、不涉及操作数据、不处理数据、UI和数据严格的分开。</p>
-<h4 id="ViewModel层"><a href="#ViewModel层" class="headerlink" title="ViewModel层"></a>ViewModel层</h4><p>ViewModel 只做和业务逻辑和业务数据相关的事，不做任何和UI、控件相关的事</p>
-<h4 id="举栗子"><a href="#举栗子" class="headerlink" title="举栗子"></a>举栗子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;data&gt;</span><br><span class="line">        &lt;variable</span><br><span class="line">            name=&quot;person&quot;</span><br><span class="line">            type=&quot;com.zcy.nidavellir.mydatabinding.PersonViewModel&quot;/&gt;</span><br><span class="line">    &lt;/data&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:id=&quot;@+id/asdf&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;person.name&#125;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;Integer.toString(person.likes)&#125;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/button&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:onClick=&quot;@&#123;() -&gt; person.onLike()&#125;&quot;</span><br><span class="line">            android:text=&quot;+LIke&quot; /&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/layout&gt;</span><br></pre></td></tr></table></figure>
-<p>我们在这里面绑定了View与Model</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val viewModel = ViewModelProvider.NewInstanceFactory().create(PersonViewModel::class.java)</span><br><span class="line">override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState)</span><br><span class="line">    val binding =</span><br><span class="line">        DataBindingUtil.setContentView&lt;com.zcy.nidavellir.mydatabinding.databinding.ActivityMainBinding&gt;(this, R.layout.activity_main)</span><br><span class="line">    binding.person = viewModel</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在Activity中去赋值xml中的参数变量</p>
-<p><strong><em>这里 AndroidX 中的ViewModelProvider 与 Support 中的ViewModelProvider 不太一样 </em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class PersonViewModel : ViewModel() &#123;</span><br><span class="line">    val name = ObservableField(&quot;Ada&quot;)</span><br><span class="line">    val likes = ObservableInt(0)</span><br><span class="line"></span><br><span class="line">    fun onLike() &#123;</span><br><span class="line">        likes.set(likes.get() + 1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后在ViewModel中去处理点击事件</p>
+        <h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><p>先介绍概念在举一个栗子</p>
+<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul>
+<li>自动处理fragment transactions</li>
+<li>正确处理 <strong>up</strong> and <strong>back</strong></li>
+<li>动画和过度的默认行为</li>
+<li>Deep linking as a first class operation // 咋翻译啊？</li>
+<li>仅用少量代码实现 navigation UI patterns (like navigation drawers and bottom nav)</li>
+<li>导航时安全的传递信息</li>
+<li>在Android Studio中支持可视化编辑导航</li>
+</ul>
+<h4 id="主要由三部分组成"><a href="#主要由三部分组成" class="headerlink" title="主要由三部分组成"></a>主要由三部分组成</h4><p><strong><code>NavGraphFragment</code></strong> 导航界面的容器，首先要展示一个fragment必须要有一个容器来承载它，之前可能是framelayout或者RelativeLayout 而现在换成了是 NavGraphFragment 这些个fragment都展示在NavGraphFragment上面</p>
+<ul>
+<li>app:defaultNavHost=”true”这个属性意味着你的NavGraphFragment将会 拦截系统Back键的点击事件 </li>
+<li>同时 必须重写 Activity的 onSupportNavigateUp() 方法</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">override fun onSupportNavigateUp()</span><br><span class="line">        = findNavController(R.id.nav_host_fragment).navigateUp()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>app:navGraph=”@navigation/nav_graph_main”这个属性就很好理解了，它会指向一个navigation_graph的xml文件，NavGraphFragment就会 导航并展示对应的Fragment。</p>
+</li>
+</ul>
+<p><strong><code>Navigation Graph (New XML resource)</code></strong> 用于声明导航结构图，包含有fragment的动作，携带的参数等</p>
+<p><strong><code>NavController (Kotlin/Java object)</code></strong> 发起动作，导航你想导航到的任何位置</p>
+<h4 id="获取NavController的三种方式："><a href="#获取NavController的三种方式：" class="headerlink" title="获取NavController的三种方式："></a>获取NavController的三种方式：</h4><ul>
+<li>Fragment.findNavController()</li>
+<li>View.findNavController()</li>
+<li>Activity.findNavController(viewId: Int)</li>
+</ul>
+<h4 id="导航时添加转场动画"><a href="#导航时添加转场动画" class="headerlink" title="导航时添加转场动画"></a>导航时添加转场动画</h4><p> 这里面用的是DSL形式，得意~~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">val options = navOptions &#123;</span><br><span class="line">    anim &#123;</span><br><span class="line">        enter = R.anim.slide_in_right</span><br><span class="line">        exit = R.anim.slide_out_left</span><br><span class="line">        popEnter = R.anim.slide_in_left</span><br><span class="line">        popExit = R.anim.slide_out_right</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">view.findViewById&lt;Button&gt;(R.id.navigate_destination_button)?.setOnClickListener &#123;</span><br><span class="line">    findNavController().navigate(R.id.flow_step_one_dest, null, options)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者写在Action标签里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;action android:id=&quot;@+id/next_action&quot;</span><br><span class="line">        app:destination=&quot;@+id/flow_step_one&quot;</span><br><span class="line">        app:enterAnim=&quot;@anim/slide_in_right&quot;</span><br><span class="line">        app:exitAnim=&quot;@anim/slide_out_left&quot;</span><br><span class="line">        app:popEnterAnim=&quot;@anim/slide_in_left&quot;</span><br><span class="line">        app:popExitAnim=&quot;@anim/slide_out_right&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="安全的获取参数"><a href="#安全的获取参数" class="headerlink" title="安全的获取参数"></a>安全的获取参数</h4><p>在fragment标签下增加参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;argument</span><br><span class="line">        android:name=&quot;flowStepNumber&quot;</span><br><span class="line">        app:argType=&quot;integer&quot;</span><br><span class="line">        android:defaultValue=&quot;1&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>相比于之前在fragment中获取参数的这种非类型安全（type safe）的形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val username = arguments?.getString(&quot;usernameKey&quot;)</span><br></pre></td></tr></table></figure>
+<p>Navigation提供了一种安全形式</p>
+<p>如果声明了argument 那么会自动生成一些代码供开发者使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val safeArgs = FlowStepFragmentArgs.fromBundle(arguments)</span><br><span class="line">val flowStepNumber = safeArgs.flowStepNumber</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -435,7 +449,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DataBinding/" rel="tag"># DataBinding</a>
+            <a href="/tags/Jetpack/" rel="tag"># Jetpack</a>
           
         </div>
       
@@ -448,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/08/fancyDialog/" rel="next" title="DSL风格代替Builder模式 fancyDialog">
-                <i class="fa fa-chevron-left"></i> DSL风格代替Builder模式 fancyDialog
+              <a href="/2019/02/12/jetpack/" rel="next" title="Jetpack 全家桶">
+                <i class="fa fa-chevron-left"></i> Jetpack 全家桶
               </a>
             
           </div>
@@ -457,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/12/jetpack/" rel="prev" title="Jetpack 全家桶">
-                Jetpack 全家桶 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataBinding"><span class="nav-number">1.</span> <span class="nav-text">DataBinding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的例子"><span class="nav-number">1.1.</span> <span class="nav-text">简单的例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM"><span class="nav-number">2.</span> <span class="nav-text">MVVM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Model层"><span class="nav-number">2.1.</span> <span class="nav-text">Model层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View层"><span class="nav-number">2.2.</span> <span class="nav-text">View层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewModel层"><span class="nav-number">2.3.</span> <span class="nav-text">ViewModel层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举栗子"><span class="nav-number">2.4.</span> <span class="nav-text">举栗子</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation"><span class="nav-number">1.</span> <span class="nav-text">Navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优势"><span class="nav-number">1.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要由三部分组成"><span class="nav-number">1.2.</span> <span class="nav-text">主要由三部分组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取NavController的三种方式："><span class="nav-number">1.3.</span> <span class="nav-text">获取NavController的三种方式：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导航时添加转场动画"><span class="nav-number">1.4.</span> <span class="nav-text">导航时添加转场动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全的获取参数"><span class="nav-number">1.5.</span> <span class="nav-text">安全的获取参数</span></a></li></ol></li></ol></div>
             
 
           </div>
