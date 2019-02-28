@@ -1391,7 +1391,9 @@ table tr:nth-child(2n), thead {
 
 .profile .avatar-img {
     max-width: 160px;
+    max-height: 160px;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     transform: translate3d(0, -65%, 0);
 }
