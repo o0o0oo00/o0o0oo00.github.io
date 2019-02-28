@@ -4,9 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="2018-09-27 小雨, Zhaocy">
-    <meta name="description" content="过多的选择，会让最终被选择的“幸运儿”魅力大减，从而满足感更低
-">
+    <meta name="keywords" content="注解知识简述, Zhaocy">
+    <meta name="description" content="注解知识点概念注解是一种元数据形式，可以被添加到java源代码中，类、方法、变量、参数、包都可以被注解，注解对他们操作的代码没有直接的影响。
+作用
+标记，用于告诉编辑器一些信息
+编译时动态处理，例如动态生成代码
+运行时动态处理，例如得到注解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>2018-09-27 小雨 | Zhaocy</title>
+    <title>注解知识简述 | Zhaocy</title>
     <link rel="icon" type="image/png" href="/medias/star.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -280,13 +283,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        2018-09-27 小雨
+                        注解知识简述
                     </div>
                 </div>
             </div>
@@ -378,8 +381,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/diary/" target="_blank">
-                                <span class="chip bg-color">diary</span>
+                            <a href="/tags/android/" target="_blank">
+                                <span class="chip bg-color">android</span>
                             </a>
                         
                     </div>
@@ -390,8 +393,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Diary/" class="post-category" target="_blank">
-                                Diary
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                技术
                             </a>
                         
                     </div>
@@ -402,21 +405,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-09-27
+                    2018-10-10
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        27
+                        840
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -432,7 +435,93 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <center>过多的选择，会让最终被选择的“幸运儿”魅力大减，从而满足感更低</center>
+                <h3 id="注解知识点"><a href="#注解知识点" class="headerlink" title="注解知识点"></a>注解知识点</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>注解是一种元数据形式，可以被添加到java源代码中，类、方法、变量、参数、包都可以被注解，注解对他们操作的代码没有直接的影响。<br><a id="more"></a></p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
+<li>标记，用于告诉编辑器一些信息</li>
+<li>编译时动态处理，例如动态生成代码</li>
+<li>运行时动态处理，例如得到注解信息  </li>
+</ol>
+<h4 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h4><ol>
+<li>通过@interface定义，注解名即为自定义注解名</li>
+<li>注解配置参数名为注解类的方法名  </li>
+<li>所有方法没有方法体，没有参数没有修饰符，实际只允许 public &amp; abstract 修饰符，默认为 public，不允许抛异常  </li>
+<li>方法返回值只能是基本类型，String, Class, annotation, enumeration 或者是他们的一维数组  </li>
+<li>若只有一个默认属性，可直接用 value() 函数。一个属性都没有表示该 Annotation 为 Mark Annotation</li>
+<li>可以加 default 表示默认值 </li>
+</ol>
+<pre><code>@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Inherited
+public @interface MethodInfo {
+
+String author() default &quot;o0o0oo00&quot;;
+
+String date();
+
+int version() default 1;
+}
+</code></pre><h4 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h4><p>它是一种基本注解，用于应用到定义的注解上面</p>
+<ul>
+<li>@Documented 是否会保存到 Javadoc 文档中</li>
+<li>@Retention 保留时间，可选值 SOURCE（源码时），CLASS（编译时），RUNTIME（运行时），默认为 CLASS，SOURCE 大都为 Mark Annotation，这类 Annotation 大都用来校验，比如 Override, SuppressWarnings</li>
+<li>@Target 可以用来修饰哪些程序元素  </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>ElementType.ANNOTATION_TYPE  可以给一个注解进行注解<br>ElementType.CONSTRUCTOR  可以给构造方法进行注解<br>ElementType.FIELD  可以给属性进行注解<br>ElementType.LOCAL_VARIABLE  可以给局部变量进行注解<br>ElementType.METHOD   可以给方法进行注解<br>ElementType.PACKAGE  可以给一个包进行注解<br>ElementType.PARAMETER  可以给一个方法内的参数进行注解<br>ElementType.TYPE  可以给一个类型进行注解，比如类、接口、枚举</p>
+<p>未标注则表示可修饰所有</p>
+<ul>
+<li>@Inherited 是否可以被继承，默认为 false。意思是说，老子是富豪，那么老子的儿子虽然没有明确的指明为是富豪，但他也是富豪。</li>
+<li>@Repeatable 注解会多次应用，通常是注解的值可以同时取多个</li>
+</ul>
+<pre><code>@interface Persons {
+Person[]  value();
+}
+
+@Repeatable(Persons.class)
+@interface Person{
+String role default &quot;goodman&quot;;
+}
+
+@Person(role=&quot;motherfucker&quot;)
+@Person(role=&quot;asshole&quot;)
+@Person(role=&quot;bitch&quot;)
+public class SuperMan{
+
+}
+
+</code></pre><p><strong>Attention!</strong>  </p>
+<ol>
+<li>如果只有一个名为value的属性时，在使用的时候可以省略命名参数直接填入</li>
+<li>如果定义的时候一个属性都没有那么在使用的时候连括号都可以省略</li>
+</ol>
+<h4 id="运行时注解解析"><a href="#运行时注解解析" class="headerlink" title="运行时注解解析"></a>运行时注解解析</h4><p>运行时 Annotation 指 @Retention 为 RUNTIME 的 Annotation，可手动调用下面常用 API 解析  </p>
+<blockquote>
+<p>method.getAnnotation(AnnotationName.class);<br>method.getAnnotations();<br>method.isAnnotationPresent(AnnotationName.class);是否应用了某个注解   </p>
+</blockquote>
+<pre><code>public static void main (String[] args){
+try {
+Class cls = Class.forName(&quot;com.zcy.nidavellir.javaworld.java.App&quot;);
+for (Method method : cls.getMethods()) {
+MethodInfo methodInfo = method.getAnnotation(MethodInfo.class);
+if (methodInfo != null) {
+System.out.println(&quot;method name:&quot; + method.getName());
+System.out.println(&quot;method author:&quot; + methodInfo.author());
+System.out.println(&quot;method version:&quot; + methodInfo.version());
+System.out.println(&quot;method date:&quot; + methodInfo.date());
+}
+}
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+}
+</code></pre><h4 id="编译时注解解析"><a href="#编译时注解解析" class="headerlink" title="编译时注解解析"></a>编译时注解解析</h4><p>编译时 Annotation 指 @Retention 为 CLASS 的 Annotation，由编译器自动解析</p>
+<ol>
+<li>自定义类集成自 AbstractProcessor</li>
+<li>重写其中的 process 函数  </li>
+</ol>
+<p>实际是编译器在编译时自动查找所有继承自 AbstractProcessor 的类，然后调用他们的 process 方法去处理</p>
 
             </div>
             <hr>
@@ -456,7 +545,7 @@
                     </span>
                     <a href="https://o0o0oo00.github.io" class="b-link-green">Zhaocy</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/09/27/小雨/" class="b-link-green">2018-09-27 小雨</a>
+                    <a href="/2018/10/10/annotation/" class="b-link-green">注解知识简述</a>
                 </p>
             </div>
         </div>
@@ -478,7 +567,7 @@
         repo: 'comment',
         owner: 'o0o0oo00',
         admin: "o0o0oo00",
-        id: '2018-09-27T19-52-29',
+        id: '2018-10-10T16-22-24',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -503,34 +592,45 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2018/10/03/Personal-introduction/">
+                <a href="/2018/10/11/fx/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Personal introduction">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="泛型简述">
                         
-                        <span class="card-title">Personal introduction</span>
+                        <span class="card-title">泛型简述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">想要写点什么，但是不知道写点什么，反正就随便写点什么。就从我是一个什么样的人介绍开始吧，我出生于1994年，到2018年就是24周岁，今年是我再北京的第二个年头，没取得什么成就，反正就是勉强度日。我这个人性格善良，还有emmm。。。
-好了
-</div>
+                    <div class="summary">泛型泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。看一个例子，证明为什么要有泛型
+class Cache {
+var value: Any? = null
+}
+我们操作数据的时候是酱紫的
+Ca</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-03
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-11
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Diary/" class="post-category" target="_blank">
-                                    Diary
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                    技术
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/kotlin/" target="_blank">
+                        <span class="chip bg-color">kotlin</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -542,28 +642,28 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/09/25/天气好好/">
+                <a href="/2018/10/09/Observer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="2018-09-25 天气好好">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="观察者模式简述">
                         
-                        <span class="card-title">2018-09-25 天气好好</span>
+                        <span class="card-title">观察者模式简述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
-</div>
+                    <div class="summary">观察者模式简述点击查看理论知识…（⊙＿⊙；）…
+观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Depe</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-25
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Diary/" class="post-category" target="_blank">
-                                    Diary
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                    技术
                                 </a>
                             
                             
@@ -573,8 +673,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/diary/" target="_blank">
-                        <span class="chip bg-color">diary</span>
+                    <a href="/tags/kotlin/" target="_blank">
+                        <span class="chip bg-color">kotlin</span>
                     </a>
                     
                 </div>
