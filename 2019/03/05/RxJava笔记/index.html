@@ -4,9 +4,14 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="2018.9.21 秋高气爽, Zhaocy">
-    <meta name="description" content="#### 你给别人的是善意，照亮的确实你自己
-">
+    <meta name="keywords" content="RxJava笔记, Zhaocy">
+    <meta name="description" content="RxJava笔记如果仅仅是用RxJava的观察者模式Observable来代替原来的Callback形式，显然意义是不大的。
+也许除了炫技以外，真的不是我们使用RxJava的理由。
+也许目前最流行的说法是
+
+链式调用
+异步+简洁
+解决回调地">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +19,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>2018.9.21 秋高气爽 | Zhaocy</title>
+    <title>RxJava笔记 | Zhaocy</title>
     <link rel="icon" type="image/png" href="/medias/star.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -280,13 +285,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        2018.9.21 秋高气爽
+                        RxJava笔记
                     </div>
                 </div>
             </div>
@@ -378,8 +383,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/diary/" target="_blank">
-                                <span class="chip bg-color">diary</span>
+                            <a href="/tags/rxjava/" target="_blank">
+                                <span class="chip bg-color">rxjava</span>
                             </a>
                         
                     </div>
@@ -390,8 +395,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Diary/" class="post-category" target="_blank">
-                                Diary
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                技术
                             </a>
                         
                     </div>
@@ -402,21 +407,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-09-21
+                    2019-03-05
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        16
+                        1.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -432,7 +437,75 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote class="blockquote-center"><br>#### 你给别人的是善意，照亮的确实你自己<br></blockquote>
+                <h2 id="RxJava笔记"><a href="#RxJava笔记" class="headerlink" title="RxJava笔记"></a>RxJava笔记</h2><p>如果仅仅是用RxJava的观察者模式Observable来代替原来的Callback形式，显然意义是不大的。</p>
+<p>也许除了炫技以外，真的不是我们使用RxJava的理由。</p>
+<p>也许目前最流行的说法是</p>
+<ul>
+<li>链式调用</li>
+<li>异步+简洁</li>
+<li>解决回调地狱</li>
+</ul>
+<p>实际上RxJava不止于此</p>
+<h3 id="Observable在空间维度上重新组织事件"><a href="#Observable在空间维度上重新组织事件" class="headerlink" title="Observable在空间维度上重新组织事件"></a>Observable在空间维度上重新组织事件</h3><p>比如说一个获取一组图片的网络请求，需要加入一个缓存（缓存URL），也就是说当需要展示图片的时候，先获取本地的URL集合，同时发起新的网络请求，等待网络请求完成后，更新缓存，同时使用最新的图片集合刷新列表，缓存可以使用<strong>JakeWharton</strong> 的 <a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FJakeWharton%2FDiskLruCache" target="_blank" rel="noopener">DiskLruCache</a></p>
+<h4 id="尝试把读取图片的操作封装为一个Observable"><a href="#尝试把读取图片的操作封装为一个Observable" class="headerlink" title="尝试把读取图片的操作封装为一个Observable"></a>尝试把读取图片的操作封装为一个Observable</h4><pre class=" language-kotlin"><code class="language-kotlin">Observable<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Photo<span class="token operator">></span><span class="token operator">></span> cachedObservable <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>emitter <span class="token operator">-></span> <span class="token punctuation">{</span>
+    DiskLruCache<span class="token punctuation">.</span>Snapshot snapshot <span class="token operator">=</span> cache<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"getAllPhotos"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>snapshot <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>Photo<span class="token operator">></span> cachedPhotos <span class="token operator">=</span> new <span class="token function">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>
+            snapshot<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>VALUE_INDEX<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            new TypeToken<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Photo<span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>cachedPhotos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+    emitter<span class="token punctuation">.</span><span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后运用<code>startWith</code> 操作符，将两个Observable结合放在一起，这时只需要一个观察者，就可以满足需求了，</p>
+<pre class=" language-kotlin"><code class="language-kotlin">networkApi<span class="token punctuation">.</span><span class="token function">getAllPhotos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">doOnNext</span><span class="token punctuation">(</span>photos <span class="token operator">-></span> 
+        <span class="token comment" spellcheck="true">// 更新缓存</span>
+        cache<span class="token punctuation">.</span><span class="token function">edit</span><span class="token punctuation">(</span><span class="token string">"getAllPhotos"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>VALUE_INDEX<span class="token punctuation">,</span> new <span class="token function">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span>photos<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 读取现有缓存</span>
+    <span class="token punctuation">.</span><span class="token function">startWith</span><span class="token punctuation">(</span>cachedObservable<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">subscribeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">io</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>AndroidSchedulers<span class="token punctuation">.</span><span class="token function">mainThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>photos <span class="token operator">-></span> <span class="token punctuation">{</span>
+        adapter<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>photos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        adapter<span class="token punctuation">.</span><span class="token function">notifyDataSetChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>这样的写法相比较于传统的callback回调来说，减少了Callback的数量，并且观察者的职责单一且清晰了起来，不再关心数据从哪里来，经过怎样的变换。</p>
+<h4 id="再进一步-比较两个Observable的发送内容"><a href="#再进一步-比较两个Observable的发送内容" class="headerlink" title="再进一步 比较两个Observable的发送内容"></a>再进一步 比较两个Observable的发送内容</h4><p>如果两次发射的内容一致，那么久没有必要去刷新界面了，先不说用Callback来怎样去实现。</p>
+<p>我们直接看使用Rxjava如何处理这个需求</p>
+<p><code>distinctUntilChanged</code>操作符用来确保Observable发射的数据<strong>相邻的两个元素</strong>必须是不相等的。</p>
+<p>只需要加一个操作符而已，就可以完美的解决需求。</p>
+<p>而我们的观察者至始至终都是比较稳定的，不关心数据从何而来，也并没有发什么变化。</p>
+<ul>
+<li>Observable通过内置的操作符对自身发射的元素在<strong>空间维度上重新组织</strong>，或者与其他的Observable一起在空间维度上进行重新组织，使得观察者的逻辑简单而直接，不需要关心数据从何而来，从而使观察者的逻辑较为<strong>稳定</strong>。</li>
+<li>传统的Callback形式是直接生产者与消费者通过及回调接口进行联系。而引入RxJava之后在这个生产者-消费者模型中间又多了一层RxJavaOperator处理。<ul>
+<li>比如说网络请求相关的逻辑，测试就不是很方便，但是如果们我们使用RxJava进行解耦以后，观察者只是耦合Observable这个接口而已，我们可以手动创建用于测试的Observable，进而测试我们的观察者模块。</li>
+</ul>
+</li>
+<li>取消订阅：取消订阅下放到了观察者这一层了，观察者在订阅Observable时，会得到一个Disposable，观察者不需要知道时间的产生、源头在哪里，只要通过这个接口通知事件生产者就可以了。</li>
+</ul>
+<h3 id="时间维度"><a href="#时间维度" class="headerlink" title="时间维度"></a>时间维度</h3><p>比如所搜索功能，每次输入新的内容都会出发搜索接口，而用户如果以过快的速度去输入的话，势必会造成请求次数过多，而请求返回的顺序出现差错，先请求的接口在后请求的接口之后返回数据，显然我们是没有必要去接收之前的数据的，应该取消它。</p>
+<ol>
+<li><p>防止用户输入过快，触发过多网络请求，需要对输入事件做一下防抖动。</p>
+</li>
+<li><p>用户在输入关键词过程中可能触发多次请求，那么，如果后一次请求的结果先返回，前一次请求的结果后返回，这种情况应该保证界面展示的是后一次请求的结果。</p>
+</li>
+<li>用户在输入关键词过程中可能触发多次请求，那么，如果后一次请求的结果返回时，前一次请求的结果尚未返回的情况下，就应该取消前一次请求。</li>
+</ol>
+<blockquote>
+<p><code>switchMap</code> 这个操作符与 <code>flatMap</code> 操作符类似，但是区别是如果原 <code>Observable</code> 中的两个元素，通过 <code>switchMap</code> 操作符都转为 <code>Observable</code> 之后，如果后一个元素对应的 <code>Observable</code> 发射元素时，前一个元素对应的 <code>Observable</code> 尚未发射完所有元素，那么前一个元素对应的 <code>Observable</code> 会被自动取消订阅，尚未发射完的元素也不会体现在 <code>switchMap</code> 操作符调用后产生的新的 <code>Observable</code> 发射的元素中</p>
+</blockquote>
+<blockquote>
+<p><code>debounce</code> 操作符产生一个新的 <code>Observable</code>, 这个 <code>Observable</code> 只发射原 <code>Observable</code>中时间间隔小于指定阈值的最大子序列的最后一个元素</p>
+</blockquote>
+<p><code>debounce</code> 操作符解决了问题 <strong>1</strong>，<code>switchMap</code> 操作符解决了问题 <strong>2</strong>、<strong>3</strong>。这个例子可以很好的说明，<strong>RxJava 的 Observable 可以通过一系列操作符从时间的维度上重新组织事件，从而简化观察者的逻辑</strong>。</p>
+<p>[原文链接，作者：prototypez](</p>
 
             </div>
             <hr>
@@ -456,7 +529,7 @@
                     </span>
                     <a href="https://o0o0oo00.github.io" class="b-link-green">Zhaocy</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/09/21/2018-9-21-秋高气爽/" class="b-link-green">2018.9.21 秋高气爽</a>
+                    <a href="/2019/03/05/RxJava笔记/" class="b-link-green">RxJava笔记</a>
                 </p>
             </div>
         </div>
@@ -478,7 +551,7 @@
         repo: 'comment',
         owner: 'o0o0oo00',
         admin: "o0o0oo00",
-        id: '2018-09-21T10-53-02',
+        id: '2019-03-05T16-25-59',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -501,41 +574,48 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2018/09/23/有风冷了/">
+                <a href="/2019/03/05/RxJava笔记/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="2018.9.23 有风冷了">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="RxJava笔记">
                         
-                        <span class="card-title">2018.9.23 有风冷了</span>
+                        <span class="card-title">RxJava笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">正是因为不去盲目期许未来，所以任何的一件小事情都会成为惊喜。
-</div>
+                    <div class="summary">RxJava笔记如果仅仅是用RxJava的观察者模式Observable来代替原来的Callback形式，显然意义是不大的。
+也许除了炫技以外，真的不是我们使用RxJava的理由。
+也许目前最流行的说法是
+
+链式调用
+异步+简洁
+解决回调地</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Diary/" class="post-category" target="_blank">
-                                    Diary
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                    技术
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/diary/" target="_blank">
-                        <span class="chip bg-color">diary</span>
+                    <a href="/tags/rxjava/" target="_blank">
+                        <span class="chip bg-color">rxjava</span>
                     </a>
                     
                 </div>
@@ -549,20 +629,21 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/09/18/twitter/">
+                <a href="/2019/03/04/autodispose/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="twitter 登录 分享">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="autodispose">
                         
-                        <span class="card-title">twitter 登录 分享</span>
+                        <span class="card-title">autodispose</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Twitter 登录1、添加依赖：implementation ‘com.twitter.sdk.android:twitter:3.1.1’implementation ‘com.twitter.sdk.android:tweet-com</div>
+                    <div class="summary">[译]AutoDispose 未完AutoDispose是RxJava2的一个工具，在一定的生命周期内，自动解除订阅，以防止因为生命周期的不同导致的内存泄漏。
+概览通常情况下（尤其是在移动应用开发中），比如在Android中，Activit</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-18
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-04
                             </span>
                         <span class="publish-author">
                             
@@ -579,8 +660,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/android/" target="_blank">
-                        <span class="chip bg-color">android</span>
+                    <a href="/tags/rxjava/" target="_blank">
+                        <span class="chip bg-color">rxjava</span>
                     </a>
                     
                 </div>
