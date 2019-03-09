@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="用RxJava写一个EventBus, Zhaocy">
     <meta name="description" content="用RxJava写一个EventBus骚话不说。现在我们用RxJava来优雅的实现它。RxJava我们都知道，观察者模式！
-首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。
-ObservableMa">
+EventBus，直接翻译为事件的公交车，我们现在写一个事件的专车。
+首先写一个用于观察的ObservableMap作">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -410,7 +410,7 @@ ObservableMa">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.1k
+                        1.2k
                     </div>
                     
 
@@ -434,7 +434,8 @@ ObservableMa">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="用RxJava写一个EventBus"><a href="#用RxJava写一个EventBus" class="headerlink" title="用RxJava写一个EventBus"></a>用RxJava写一个EventBus</h2><p>骚话不说。现在我们用RxJava来<strong>优雅的</strong>实现它。RxJava我们都知道，<a href="https://o0o0oo00.github.io/2018/10/09/Observer/">观察者模式</a>！</p>
-<p>首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。</p>
+<p>EventBus，直接翻译为事件的公交车，我们现在写一个事件的专车。</p>
+<p>首先写一个用于观察的ObservableMap作为订单池，每当Map发生改变的时候，都会去通知观察者。</p>
 <p>ObservableMap的Key和value 就相当于是订单和人，订单池里面有很多的订单（key），而这些订单与人绑定，</p>
 <p>我们Map的key作为订单，来确定谁是乘车人，然后司机只需要接单，就可以去接乘客出发去目的地啦。</p>
 <pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">class</span> ObservableMap<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">:</span> HashMap<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -459,8 +460,8 @@ ObservableMa">
 <p>1、继承自HashMap&lt;T,K&gt; 然后重写它的put方法，每当有put操作发生的时候，也就是下单的时候，我们就去通知我们的滴滴平台，</p>
 <p>用一个高阶函数，来将这个key传给Observable，让Observable来发射给观察者。</p>
 <p>2、我们写一个滴滴平台用来分发专车订单：</p>
-<p>每次发生put操作也就会生成一个订单，</p>
-<p>定义一个Observable好让观察者来观察我，也就是一个滴滴平台或者称之为订单池，司机可以通过订单id来找到我。</p>
+<p>每次发生put操作也就会生成一个订单(如果之前没有订单的话)，</p>
+<p>定义一个Observable好让观察者（司机）来观察我（订单），也就是一个滴滴平台管理的订单池，司机可以通过订单id来找到我。</p>
 <pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">val</span> onBooleanChange <span class="token operator">=</span> Observable<span class="token punctuation">.</span>create<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span> emitter <span class="token operator">-></span>
         <span class="token keyword">val</span> onChange<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-></span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span>
             emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
@@ -471,29 +472,30 @@ ObservableMa">
         map<span class="token punctuation">.</span><span class="token function">registerOnChange</span><span class="token punctuation">(</span>onChange<span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">share</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<p>我们都知道当Observable在发生订阅关系的时候才会发射数据，所以我们写一个发生订阅的方法</p>
+<p>我们都知道当Observable在发生订阅关系的时候才会发射数据，所以我们写一个发生订阅的方法。我们将他作为司机。</p>
 <pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">observeBoolean</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Observable<span class="token operator">&lt;</span>Boolean<span class="token operator">></span> <span class="token operator">=</span> onBooleanChange
         <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it <span class="token operator">==</span> key <span class="token punctuation">}</span>
         <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> map<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token punctuation">}</span>
 </code></pre>
-<p>根据传进来的key作为唯一标识，也就是司机要知道是你打的专车，然后将对应的value发送给Observer观察者。司机拿着这个订单Key来匹配滴滴平台中的诸多订单<strong>filter { it == key }</strong>，当发现有匹配订单的时候，司机可以根据这订单来拿到乘客<strong>.map { map[key] }</strong></p>
-<p>我们看下面，这里为map进行了一次put操作，前面说到map进行操作put，然后高阶函数将key发射给Observable，由Observable来发射给各个观察者(司机)</p>
+<p>根据传进来的key作为唯一标识，也就是司机要知道是你打的专车，然后将对应的value发送给Observer观察者。司机拿着这个订单Key来匹配滴滴平台中的诸多订单<strong>filter { it == key }</strong>，当发现有匹配订单的时候，司机可以根据这订单来拿到乘客<strong>.map { map[key] }</strong>，一旦找到匹配的订单，司机就可以去接乘客啦。</p>
+<p>我们看下面，这里为map进行了一次put操作，前面说到map进行操作put，然后高阶函数将key发射给Observable，这里我们可以看做是乘客去下单啦，下的订单下到订单池中去，由Observable来发射给各个观察者(司机)</p>
 <p> <strong>map[key] = value</strong>    就是   <strong>map.put(key,value)</strong></p>
 <pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">setBoolean</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">,</span>  value<span class="token operator">:</span> Boolean<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         map<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
     <span class="token punctuation">}</span>
 </code></pre>
-<p>现在我要下单啦，一个订单<strong>The KEY</strong>和一个我<strong>value</strong>，先别管我为什么是一个true，我也只是一个数据信息而已。</p>
-<pre class=" language-kotlin"><code class="language-kotlin">ObserverBooleanStatus<span class="token punctuation">.</span><span class="token function">setBoolean</span><span class="token punctuation">(</span>The KEY<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
-</code></pre>
-<p>已经发送滴滴平台啦。静候司机大哥</p>
 <p>既然已经将Observable写好了，那么理所当然我们马上就要去<strong>subscribe</strong>发生订阅关系了啦！</p>
 <p>司机拿到了真正的订单<strong>The KEY</strong>，油门已经踩得嗡嗡响了，一旦乘客下单 订单号为The KEY，那么司机马上就可以接到乘客出发啦，最终目的地是sout。岂不美哉</p>
 <pre><code> ObserverBooleanStatus.observeBoolean(The KEY)
             .subscribe { boolean -&gt; 
                sout(boolean = $boolean)
             }
-</code></pre><h2 id="用LiveData写一个EventBus"><a href="#用LiveData写一个EventBus" class="headerlink" title="用LiveData写一个EventBus"></a>用LiveData写一个EventBus</h2><p>上面的那些比喻理解起来可能有些迷糊，再来梳理一下，然后用LiveData再写一个。</p>
+
+</code></pre><p>现在我要下单啦，一个订单<strong>The KEY</strong>和一个我<strong>value</strong>，先别管我为什么是一个true，我也只是一个数据信息而已。</p>
+<pre class=" language-kotlin"><code class="language-kotlin">ObserverBooleanStatus<span class="token punctuation">.</span><span class="token function">setBoolean</span><span class="token punctuation">(</span>The KEY<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+</code></pre>
+<p>已经发送滴滴平台啦。司机大哥一看到我下单了，立刻就来接我啦。</p>
+<h2 id="用LiveData写一个EventBus"><a href="#用LiveData写一个EventBus" class="headerlink" title="用LiveData写一个EventBus"></a>用LiveData写一个EventBus</h2><p>上面的那些比喻理解起来可能有些迷糊，再来梳理一下，然后用LiveData再写一个。</p>
 <p>其实只要理解了，事件通知这个东西的本质是观察者模式这件事，就能触类旁通。</p>
 <h3 id="we-need"><a href="#we-need" class="headerlink" title="we need"></a>we need</h3><ul>
 <li>一个订单池：订单池负责存储订单(<strong>String</strong>)和乘客信息(<strong>MutableLiveData<any></any></strong>)</li>
@@ -612,8 +614,8 @@ ObservableMa">
                 </a>
                 <div class="card-content article-content">
                     <div class="summary">用RxJava写一个EventBus骚话不说。现在我们用RxJava来优雅的实现它。RxJava我们都知道，观察者模式！
-首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。
-ObservableMa</div>
+EventBus，直接翻译为事件的公交车，我们现在写一个事件的专车。
+首先写一个用于观察的ObservableMap作</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-09
@@ -742,7 +744,7 @@ ObservableMa</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.2k</span>
+                <span class="white-color">25.3k</span>
             
 
             
