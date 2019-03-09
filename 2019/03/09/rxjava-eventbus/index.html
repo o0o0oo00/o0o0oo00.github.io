@@ -4,11 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Java反射, Zhaocy">
-    <meta name="description" content="Java反射Class的获取
-Class是一个类，不同于小写的class是关键字，不过它没有公开的构造方法，所以只能用getClass()方法获取相应的Class对象。
-
-Class aClass = new car().getClass(">
+    <meta name="keywords" content="用RxJava写一个EventBus, Zhaocy">
+    <meta name="description" content="用RxJava写一个EventBus骚话不说。现在我们用RxJava来优雅的实现它。RxJava我们都知道，观察者模式！
+首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。
+ObservableMa">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +15,7 @@ Class aClass = new car().getClass(">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Java反射 | Zhaocy</title>
+    <title>用RxJava写一个EventBus | Zhaocy</title>
     <link rel="icon" type="image/png" href="/medias/star.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -282,13 +281,13 @@ Class aClass = new car().getClass(">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Java反射
+                        用RxJava写一个EventBus
                     </div>
                 </div>
             </div>
@@ -380,8 +379,8 @@ Class aClass = new car().getClass(">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/技术/" target="_blank">
-                                <span class="chip bg-color">技术</span>
+                            <a href="/tags/custom/" target="_blank">
+                                <span class="chip bg-color">custom</span>
                             </a>
                         
                     </div>
@@ -392,8 +391,8 @@ Class aClass = new car().getClass(">
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/技术/" class="post-category" target="_blank">
-                                技术
+                            <a href="/categories/tech/" class="post-category" target="_blank">
+                                tech
                             </a>
                         
                     </div>
@@ -404,21 +403,21 @@ Class aClass = new car().getClass(">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-10-12
+                    2019-03-09
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2k
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        9 分
+                        4 分
                     </div>
                     
                 
@@ -434,286 +433,104 @@ Class aClass = new car().getClass(">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h3><h4 id="Class的获取"><a href="#Class的获取" class="headerlink" title="Class的获取"></a>Class的获取</h4><ul>
-<li>Class是一个类，不同于小写的class是关键字，不过它没有公开的构造方法，所以只能用<code>getClass()</code>方法获取相应的Class对象。</li>
-</ul>
-<pre><code>Class aClass = new car().getClass();
-</code></pre><a id="more"></a>
-<p><strong>Attention~</strong></p>
-<ul>
-<li>这种方法不适合基本类型如 int、float 等等，也可以用<br><code>.class</code>来获取</li>
-</ul>
-<pre><code>Class aClass = new car().getClass();
-Class aClass1 = car.class;
-Class aClass2 = int.class;
-Class aClass3 = String.class;
-</code></pre><ul>
-<li><code>Class.forName(包名+类名)</code>例如某些类加上了@hide注解，表示这个类不会出现在SDK中，那么我们没办法获得Car，索性就直接传入它的名字好了。</li>
-</ul>
-<h4 id="Class的名字"><a href="#Class的名字" class="headerlink" title="Class的名字"></a>Class的名字</h4><ol>
-<li><code>getName()</code>获取到的名字包含包名</li>
-<li><code>getSimpleName()</code> 相较于<code>getName()</code>去掉了包名，注意，匿名内部类获取的simpleName是一个空的字符串</li>
-<li><code>getCanonicalName()</code>官方名字，如果没有返回null</li>
-</ol>
-<h4 id="Class获取修饰符"><a href="#Class获取修饰符" class="headerlink" title="Class获取修饰符"></a>Class获取修饰符</h4><p>Java中对于一个类的修饰符有很多<br>我们可以这样获取他们</p>
-<pre><code>System.out.println(Modifier.toString(testModeify.class.getModifiers()));
-</code></pre><p>结果为：public abstract<br>还提供了一系列的判断方法如：<br>isInterface、isAbstract、isSynchronized、isFinal等等</p>
-<pre><code>System.out.println(Modifier.isPrivate(testModeify.class.getModifiers()));
-</code></pre><p>结果为false</p>
-<h4 id="获取Class成员"><a href="#获取Class成员" class="headerlink" title="获取Class成员"></a>获取Class成员</h4><h5 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h5><ul>
-<li><code>getDeclaredField(String name)</code>获取的是Class中的属性，不包含父类中的属性。</li>
-<li><code>getField()</code>获取Class中的Public属性，并且如果获取不到的话，会向其父类获取。 </li>
-<li><code>public Field[] getDeclaredFields()</code>获取所有的属性，但不包括从父类继承下来的属性</li>
-<li><code>public Field[] getFields()</code>获取自身的所有的 public 属性，包括从父类继承下来的。<br>Look at these 注释掉的是不合法的。留下的就一目了然了。</li>
-</ul>
-<pre><code>Class son =  Son.class;
-try {
-System.out.println(son.getDeclaredField(&quot;sonStrDef&quot;));
-System.out.println(son.getDeclaredField(&quot;sonPub&quot;));
-System.out.println(son.getDeclaredField(&quot;sonPro&quot;));
-System.out.println(son.getDeclaredField(&quot;sonPri&quot;));
-//            System.out.println(son.getDeclaredField(&quot;fatherStr&quot;));//error
-//            System.out.println(son.getDeclaredField(&quot;fatherPub&quot;));
-//            System.out.println(son.getDeclaredField(&quot;fatherPri&quot;));
-//            System.out.println(son.getDeclaredField(&quot;fatherProt&quot;));
+                <h2 id="用RxJava写一个EventBus"><a href="#用RxJava写一个EventBus" class="headerlink" title="用RxJava写一个EventBus"></a>用RxJava写一个EventBus</h2><p>骚话不说。现在我们用RxJava来<strong>优雅的</strong>实现它。RxJava我们都知道，<a href="https://o0o0oo00.github.io/2018/10/09/Observer/">观察者模式</a>！</p>
+<p>首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。</p>
+<p>ObservableMap的Key和value 就相当于是订单和人，订单池里面有很多的订单（key），而这些订单与人绑定，</p>
+<p>我们Map的key作为订单，来确定谁是乘车人，然后司机只需要接单，就可以去接乘客出发去目的地啦。</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">class</span> ObservableMap<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">:</span> HashMap<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-//            System.out.println(son.getField(&quot;sonStrDef&quot;));
-System.out.println(son.getField(&quot;sonPub&quot;));
-//            System.out.println(son.getField(&quot;sonPro&quot;));
-//            System.out.println(son.getField(&quot;sonPri&quot;));
-//            System.out.println(son.getField(&quot;fatherStr&quot;));
-System.out.println(son.getField(&quot;fatherPub&quot;));
-//            System.out.println(son.getField(&quot;fatherPri&quot;));
-//            System.out.println(son.getField(&quot;fatherProt&quot;));
+    <span class="token keyword">private</span> <span class="token keyword">var</span> onChange<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token operator">-></span> Unit<span class="token punctuation">)</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
 
-} catch (NoSuchFieldException e) {
-e.printStackTrace();
-}
-</code></pre><h5 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h5><p>与获取属性一样</p>
-<ul>
-<li><code>getDeclaredMethod</code></li>
-<li><code>getMethod</code></li>
-<li><code>getDeclaredMethods</code></li>
-<li><code>getMethod</code></li>
-</ul>
-<h5 id="获取构造方法"><a href="#获取构造方法" class="headerlink" title="获取构造方法"></a>获取构造方法</h5><p>一样</p>
-<h4 id="Field类型的获取"><a href="#Field类型的获取" class="headerlink" title="Field类型的获取"></a>Field类型的获取</h4><ul>
-<li><code>public Type getGenericType() {}</code></li>
-<li><code>public Class&lt;?&gt; getType() {}</code></li>
-</ul>
-<p>不同的是两者<strong>返回的类型</strong>不一样，<code>getGenericType()</code> 方法能够获取到<strong>泛型</strong>类型。</p>
-<p>看一个例子：</p>
-<ul>
-<li>定义一个公开list集合</li>
-</ul>
-<pre><code>public List&lt;String&gt; strs = new ArrayList&lt;&gt;();
-</code></pre><ul>
-<li>然后通过反射获取这个属性</li>
-</ul>
-<pre><code>for (Field field : son.getFields()) {
-System.out.println(field.getName());
-System.out.println(field.getType());
-System.out.println(field.getGenericType());
-}
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">put</span><span class="token punctuation">(</span>key<span class="token operator">:</span> T<span class="token punctuation">,</span> value<span class="token operator">:</span> K<span class="token punctuation">)</span><span class="token operator">:</span> K<span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> put <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        onChange<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> put
+    <span class="token punctuation">}</span>
 
-</code></pre><p>输出为：</p>
-<pre><code>strs
-interface java.util.List
-java.util.List&lt;java.lang.String&gt;
-</code></pre><h4 id="Field读取与赋值"><a href="#Field读取与赋值" class="headerlink" title="Field读取与赋值"></a>Field读取与赋值</h4><p>Field这个类定义了一系列的<code>set/get</code>方法来获取不同类型的值。<br>例如：<br><code>public Object get(Object obj);</code><br><code>public void set(Object obj, Object value);</code><br>Object参数的作用是为了精确到到底修改的是哪一个对象</p>
-<blockquote>
-<p>Class 本身不对成员进行储存，它只提供检索，所以需要用 Field、Method、Constructor 对象来承载这些成员，所以，针对成员的操作时，一般需要为成员指定类的实例引用。如果难于理解的话，可以这样理解，班级这个概念是一个类，一个班级有几十名学生，现在有A、B、C 3 个班级，将所有班级的学生抽出来集合到一个场地来考试，但是学生在试卷上写上自己名字的时候，还要指定自己的班级，这里涉及到的 Object 其实就是类似的作用，表示这个成员是具体属于哪个 Object。这个是为了精确定位。  </p>
-</blockquote>
-<h6 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h6><p>修改一个类中的Public属性值</p>
-<pre><code>Class son =  Son.class;//Class
-Son s = new Son();// Object 用于精确修改的位置
-Son s2 = new Son();// Object 用于精确修改的位置
-s.sonInt = 111;
-s2.sonInt = 222;
-try {
-Field field = son.getField(&quot;sonInt&quot;);
-int a = field.getInt(s);
-int a1 = field.getInt(s2);
-System.out.println(&quot;field a = &quot; + a);
-System.out.println(&quot;field a1 = &quot; + a1);
-field.setInt(s,1111);
-field.setInt(s2,2222);
-System.out.println(&quot;field s.sonInt = &quot; + s.sonInt);
-System.out.println(&quot;field s2.sonInt = &quot; + s2.sonInt);
-} catch (NoSuchFieldException e) {
-e.printStackTrace();
-} catch (IllegalAccessException e) {
-e.printStackTrace();
-}
-</code></pre><pre><code>field a = 111
-field a1 = 222
-field s.sonInt = 1111
-field s2.sonInt = 2222
-</code></pre><p>可以看到，一个field可以根据Object的参数不同，获取的值也不同，同样修改的值也不同。</p>
-<p>上面是修改的Public的属性值，如果要修改private属性的话，直接用上面的方法会报错。<code>can not access a member</code><br>应该加上<strong><code>field.setAccessible(true);</code></strong>就万事大吉了。</p>
-<h4 id="获取方法参数"><a href="#获取方法参数" class="headerlink" title="获取方法参数"></a>获取方法参数</h4><ul>
-<li><code>public Parameter[] getParameters() {}</code></li>
-<li>Parameter.java</li>
-<li><code>public String getName() {}</code>// 获取参数名字</li>
-<li><code>public Class&lt;?&gt; getType() {}</code>// 获取参数类型</li>
-<li><code>public int getModifiers() {}</code>// 获取参数的修饰符</li>
-<li>Method.java</li>
-<li><code>public Class&lt;?&gt;[] getParameterTypes() {}</code>// 获取所有的参数类型</li>
-<li><code>public Type[] getGenericParameterTypes() {}</code>// 获取所有的参数类型，包括泛型</li>
-</ul>
-<p>看一组例子：<br>Son.java</p>
-<pre><code>public class Son extends Father {
+    <span class="token keyword">fun</span> <span class="token function">registerOnChange</span><span class="token punctuation">(</span>change<span class="token operator">:</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token operator">-></span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>onChange <span class="token operator">=</span> change
+    <span class="token punctuation">}</span>
 
-void normalMethod(String name, int num) {
-}
-
-public void test(String[] paraa, List&lt;String&gt; b, HashMap&lt;Integer, Son&gt; maps) {
-}
-
-public void exe() {
-System.out.println(&quot;exexexeexexeexeexeexeee&quot;);
-}
-}
-</code></pre><pre><code>Class son = Son.class;
-
-Method[] declaredMethods = son.getDeclaredMethods();
-for (Method method : declaredMethods) {
-System.out.println(method.getName());
-// 参数类型
-Parameter[] parameters = method.getParameters();
-for (Parameter parameter : parameters) {
-System.out.println(&quot;parameter name = &quot; + parameter.getName() + &quot; &quot; + parameter.getType().getName());
-}
-
-Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
-System.out.println(&quot;method para types:&quot;);
-for (Class&lt;?&gt; type : parameterTypes) {
-System.out.print(&quot; &quot; + type.getName());
-}
-System.out.println();
-
-Type[] genericParameterTypes = method.getGenericParameterTypes();
-System.out.println(&quot;method para generic types:&quot;);
-for (Type type : genericParameterTypes) {
-System.out.print(&quot; &quot; + type.getTypeName());
-}
-System.out.println();
-System.out.println(&quot;==========================================&quot;);
-
-}
-</code></pre><p>来看一下输出，很清晰</p>
-<pre><code>test
-parameter name = arg0 [Ljava.lang.String;
-parameter name = arg1 java.util.List
-parameter name = arg2 java.util.HashMap
-method para types:
-[Ljava.lang.String; java.util.List java.util.HashMap
-method para generic types:
-java.lang.String[] java.util.List&lt;java.lang.String&gt; java.util.HashMap&lt;java.lang.Integer, com.zcy.nidavellir.javaworld.Reflection.Son&gt;
-==========================================
-normalMethod
-parameter name = arg0 java.lang.String
-parameter name = arg1 int
-method para types:
-java.lang.String int
-method para generic types:
-java.lang.String int
-==========================================
-exe
-method para types:
-
-method para generic types:
-
-==========================================
-</code></pre><h4 id="Method-获取返回值类型"><a href="#Method-获取返回值类型" class="headerlink" title="Method 获取返回值类型"></a>Method 获取返回值类型</h4><ul>
-<li><code>public Class&lt;?&gt; getReturnType() {}</code>// 获取返回值类型</li>
-<li><code>public Type getGenericReturnType() {}</code>// 获取返回值类型包括泛型</li>
-</ul>
-<h4 id="Method-获取修饰符"><a href="#Method-获取修饰符" class="headerlink" title="Method 获取修饰符"></a>Method 获取修饰符</h4><ul>
-<li><code>public int getModifiers() {}</code></li>
-</ul>
-<h4 id="Method-获取异常类型"><a href="#Method-获取异常类型" class="headerlink" title="Method 获取异常类型"></a>Method 获取异常类型</h4><ul>
-<li><code>public Class&lt;?&gt;[] getExceptionTypes() {}</code></li>
-<li><code>public Type[] getGenericExceptionTypes() {}</code></li>
-</ul>
-<h4 id="Method-方法的执行"><a href="#Method-方法的执行" class="headerlink" title="Method 方法的执行"></a>Method 方法的执行</h4><ul>
-<li><code>public Object invoke(Object obj, Object... args) {}</code></li>
-</ul>
-<p>说明一下:</p>
-<ul>
-<li>第一个参数是反射Class对应类的一个实例。如果是静态方法，那么传<code>null</code>。后面的参数对应方法Method的参数</li>
-<li><code>invoke()</code> 返回的对象是 Object，所以实际上执行的时候要进行强制转换。</li>
-<li>在对 Method 调用 <code>invoke()</code> 的时候，如果方法本身会抛出异常，那么这个异常就会经过包装，由 Method 统一抛出 <code>InvocationTargetException</code>。而通过 <code>InvocationTargetException.getCause()</code> 可以获取真正的异常。 </li>
-<li>例子：</li>
-</ul>
-<pre><code>public class testInvoke {
-public static void staticMethod(){
-System.out.println(&quot;我是个静态方法，我被调用啦&quot;);
-}
-
-private  int add (int a,int b ) {
-return a + b;
-}
-
-public void testException () throws IllegalAccessException {
-throw new IllegalAccessException(&quot;You have some problem.&quot;);
-}
-}
-
-</code></pre><p>我们来验证一下：</p>
-<pre><code>Class cls = testInvoke.class;
-try {
-
-Method method = cls.getMethod(&quot;staticMethod&quot;, null);// 参数类型的Class，没有参数所以null
-method.invoke(null, null);// 静态方法，没有参数，所以都是null
-
-testInvoke testInvoke = new testInvoke();
-Method method1 = cls.getDeclaredMethod(&quot;add&quot;, int.class, int.class);
-method1.setAccessible(true);
-int result = (int) method1.invoke(testInvoke, 2, 3);
-System.out.println(&quot;result = &quot; + result);
-
-Method method2 = cls.getDeclaredMethod(&quot;testException&quot;, null);
-method2.invoke(testInvoke, null);
-
-} catch (NoSuchMethodException e) {
-e.printStackTrace();
-} catch (SecurityException e) {
-e.printStackTrace();
-} catch (IllegalAccessException e) {
-e.printStackTrace();
-} catch (IllegalArgumentException e) {
-e.printStackTrace();
-} catch (InvocationTargetException e) {
-// 通过 InvocationTargetException.getCause() 获取被包装的异常
-System.out.println(&quot;testException occur some error,Error type is :&quot; + e.getCause().getClass().getName());
-System.out.println(&quot;Error message is :&quot; + e.getCause().getMessage());
-e.printStackTrace();
-}
-</code></pre><p>输出：</p>
-<pre><code>我是个静态方法，我被调用啦
-我是add方法，我被调用啦
-result = 5
-我是testException方法，我被调用啦
-testException occur some error,Error type is :java.lang.IllegalAccessException
-Error message is :You have some problem.
-java.lang.reflect.InvocationTargetException
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.lang.reflect.Method.invoke(Method.java:498)
-at com.zcy.nidavellir.javaworld.Reflection.main.main(main.java:110)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.lang.reflect.Method.invoke(Method.java:498)
-at com.intellij.rt.execution.application.AppMainV2.main(AppMainV2.java:131)
-Caused by: java.lang.IllegalAccessException: You have some problem.
-at com.zcy.nidavellir.javaworld.Reflection.testInvoke.testException(testInvoke.java:20)
-... 10 more
-
-
+    <span class="token keyword">fun</span> <span class="token function">unregisterOnChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>onChange <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
+<p>1、继承自HashMap&lt;T,K&gt; 然后重写它的put方法，每当有put操作发生的时候，也就是下单的时候，我们就去通知我们的滴滴平台，</p>
+<p>用一个高阶函数，来将这个key传给Observable，让Observable来发射给观察者。</p>
+<p>2、我们写一个滴滴平台用来分发专车订单：</p>
+<p>每次发生put操作也就会生成一个订单，</p>
+<p>定义一个Observable好让观察者来观察我，也就是一个滴滴平台或者称之为订单池，司机可以通过订单id来找到我。</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">val</span> onBooleanChange <span class="token operator">=</span> Observable<span class="token punctuation">.</span>create<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span> emitter <span class="token operator">-></span>
+        <span class="token keyword">val</span> onChange<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-></span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span>
+            emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        emitter<span class="token punctuation">.</span><span class="token function">setCancellable</span> <span class="token punctuation">{</span>
+            map<span class="token punctuation">.</span><span class="token function">unregisterOnChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        map<span class="token punctuation">.</span><span class="token function">registerOnChange</span><span class="token punctuation">(</span>onChange<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">share</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>我们都知道当Observable在发生订阅关系的时候才会发射数据，所以我们写一个发生订阅的方法</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">observeBoolean</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Observable<span class="token operator">&lt;</span>Boolean<span class="token operator">></span> <span class="token operator">=</span> onBooleanChange
+        <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it <span class="token operator">==</span> key <span class="token punctuation">}</span>
+        <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> map<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token punctuation">}</span>
+</code></pre>
+<p>根据传进来的key作为唯一标识，也就是司机要知道是你打的专车，然后将对应的value发送给Observer观察者。司机拿着这个订单Key来匹配滴滴平台中的诸多订单<strong>filter { it == key }</strong>，当发现有匹配订单的时候，司机可以根据这订单来拿到乘客<strong>.map { map[key] }</strong></p>
+<p>我们看下面，这里为map进行了一次put操作，前面说到map进行操作put，然后高阶函数将key发射给Observable，由Observable来发射给各个观察者(司机)</p>
+<p> <strong>map[key] = value</strong>    就是   <strong>map.put(key,value)</strong></p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">setBoolean</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">,</span>  value<span class="token operator">:</span> Boolean<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        map<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>现在我要下单啦，一个订单<strong>The KEY</strong>和一个我<strong>value</strong>，先别管我为什么是一个true，我也只是一个数据信息而已。</p>
+<pre class=" language-kotlin"><code class="language-kotlin">ObserverBooleanStatus<span class="token punctuation">.</span><span class="token function">setBoolean</span><span class="token punctuation">(</span>The KEY<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+</code></pre>
+<p>已经发送滴滴平台啦。静候司机大哥</p>
+<p>既然已经将Observable写好了，那么理所当然我们马上就要去<strong>subscribe</strong>发生订阅关系了啦！</p>
+<p>司机拿到了真正的订单<strong>The KEY</strong>，油门已经踩得嗡嗡响了，一旦乘客下单 订单号为The KEY，那么司机马上就可以接到乘客出发啦，最终目的地是sout。岂不美哉</p>
+<pre><code> ObserverBooleanStatus.observeBoolean(The KEY)
+            .subscribe { boolean -&gt; 
+               sout(boolean = $boolean)
+            }
+</code></pre><h2 id="用LiveData写一个EventBus"><a href="#用LiveData写一个EventBus" class="headerlink" title="用LiveData写一个EventBus"></a>用LiveData写一个EventBus</h2><p>上面的那些比喻理解起来可能有些迷糊，再来梳理一下，然后用LiveData再写一个。</p>
+<p>其实只要理解了，事件通知这个东西的本质是观察者模式这件事，就能触类旁通。</p>
+<h3 id="we-need"><a href="#we-need" class="headerlink" title="we need"></a>we need</h3><ul>
+<li>一个订单池：订单池负责存储订单(<strong>String</strong>)和乘客信息(<strong>MutableLiveData<any></any></strong>)</li>
+<li>一个滴滴平台：当对应订单的乘客来的时候，平台会通知司机</li>
+<li>一个司机端：司机端也就是我们所说观察者，一直观察订单，当这个订单有人来的时候，就出发。</li>
+<li>一个乘客端：就是把我的订单(key)，和我(value)发送给订单池，然后由滴滴平台来通知司机</li>
+</ul>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">object</span> LiveDataStatus <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 订单池</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> map <span class="token operator">=</span> HashMap<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> MutableLiveData<span class="token operator">&lt;</span>Any<span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 滴滴平台：分发订单</span>
+    <span class="token keyword">fun</span> <span class="token operator">&lt;</span>T <span class="token operator">:</span> Any<span class="token operator">></span> <span class="token function">observeData</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> MutableLiveData<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>map<span class="token punctuation">.</span><span class="token function">containsKey</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            map<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">MutableLiveData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> map<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token operator">!!</span> <span class="token keyword">as</span> MutableLiveData<span class="token operator">&lt;</span>T<span class="token operator">></span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 司机，焦灼的等待着订单</span>
+    <span class="token keyword">fun</span> <span class="token function">observeData</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Any <span class="token operator">=</span> <span class="token function">observeData</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 乘客端，一个订单对应一个人</span>
+    <span class="token keyword">fun</span> <span class="token function">setObserveData</span><span class="token punctuation">(</span>key<span class="token operator">:</span> String<span class="token punctuation">,</span> value<span class="token operator">:</span> Any<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        map<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">postValue</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>前提是乘客要先下单，司机端才能去接乘客。</p>
+<p>现在乘客要下单啦，他的订单号是key，它的信息是一句诗</p>
+<pre class=" language-kotlin"><code class="language-kotlin"> LiveDataStatus<span class="token punctuation">.</span><span class="token function">setObserveData</span><span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token string">"会须一饮三百杯"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>此时急不可待的司机师傅已经坐不住啦，油门踩的嗡嗡响，就等着乘客下单呢。正好上面的乘客下单了，司机立马出发，到达了 <strong>println(“it = $it”)</strong>这个地方。皆大欢喜！</p>
+<pre class=" language-kotlin"><code class="language-kotlin">LiveDataStatus<span class="token punctuation">.</span>observeData<span class="token operator">&lt;</span>Boolean<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span>activity<span class="token operator">!!</span><span class="token punctuation">,</span>android<span class="token punctuation">.</span>arch<span class="token punctuation">.</span>lifecycle<span class="token punctuation">.</span><span class="token function">Observer</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"it = <span class="token interpolation variable">$it</span>"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+
             </div>
             <hr>
 
@@ -736,7 +553,7 @@ at com.zcy.nidavellir.javaworld.Reflection.testInvoke.testException(testInvoke.j
                     </span>
                     <a href="https://o0o0oo00.github.io" class="b-link-green">Zhaocy</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/10/12/reflection/" class="b-link-green">Java反射</a>
+                    <a href="/2019/03/09/rxjava-eventbus/" class="b-link-green">用RxJava写一个EventBus</a>
                 </p>
             </div>
         </div>
@@ -758,7 +575,7 @@ at com.zcy.nidavellir.javaworld.Reflection.testInvoke.testException(testInvoke.j
         repo: 'comment',
         owner: 'o0o0oo00',
         admin: "o0o0oo00",
-        id: '2018-10-12T17-50-17',
+        id: '2019-03-09T15-24-52',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -781,41 +598,44 @@ at com.zcy.nidavellir.javaworld.Reflection.testInvoke.testException(testInvoke.j
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2018/10/15/rx/">
+                <a href="/2019/03/09/rxjava-eventbus/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="RxJava - 异步">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="用RxJava写一个EventBus">
                         
-                        <span class="card-title">RxJava - 异步</span>
+                        <span class="card-title">用RxJava写一个EventBus</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">RxJava - 异步Observable(被观察者)的创建它没有公开的构造方法，是通过内部的Create方法来创建一个
-Observable&lt;String&gt; observable = Observable.create(new</div>
+                    <div class="summary">用RxJava写一个EventBus骚话不说。现在我们用RxJava来优雅的实现它。RxJava我们都知道，观察者模式！
+首先写一个用于观察的ObservableMap，每当Map发生改变的时候，都会去通知观察者。
+ObservableMa</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/技术/" class="post-category" target="_blank">
-                                    技术
+                            <a href="/categories/tech/" class="post-category" target="_blank">
+                                    tech
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/技术/" target="_blank">
-                        <span class="chip bg-color">技术</span>
+                    <a href="/tags/custom/" target="_blank">
+                        <span class="chip bg-color">custom</span>
                     </a>
                     
                 </div>
@@ -829,45 +649,28 @@ Observable&lt;String&gt; observable = Observable.create(new</div>
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/10/11/fx/">
+                <a href="/2019/03/06/Observable/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="泛型简述">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Observable">
                         
-                        <span class="card-title">泛型简述</span>
+                        <span class="card-title">Observable</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">泛型泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。看一个例子，证明为什么要有泛型
-class Cache {
-var value: Any? = null
-}
-我们操作数据的时候是酱紫的
-Ca</div>
+                    <div class="summary"></div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-11
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-06
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/技术/" class="post-category" target="_blank">
-                                    技术
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Zhaocy
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/kotlin/" target="_blank">
-                        <span class="chip bg-color">kotlin</span>
-                    </a>
-                    
                 </div>
                 
             </div>
