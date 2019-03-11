@@ -4,10 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Use Dagger2 With Kotlin, Zhaocy">
-    <meta name="description" content="Use Dagger2 With Kotlin添加Dagger依赖dependencies {
-    kapt &amp;#39;com.google.dagger:dagger-compiler:2.16&amp;#39;
-    implementa">
+    <meta name="keywords" content="RxJava 的一些奇技淫巧, Zhaocy">
+    <meta name="description" content="RxJava 的一些奇技淫巧防止双击网上很多例子都是写RxBinding的防止抖动。但是我现在不想用它，那么如何去封装一个点击事件呢？
+分析： 我们每次点击View都发射一个onNext，然后运用操作符throttleFirst它的意思是在">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Use Dagger2 With Kotlin | Zhaocy</title>
+    <title>RxJava 的一些奇技淫巧 | Zhaocy</title>
     <link rel="icon" type="image/png" href="/medias/star.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -281,13 +280,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Use Dagger2 With Kotlin
+                        RxJava 的一些奇技淫巧
                     </div>
                 </div>
             </div>
@@ -379,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/dagger/" target="_blank">
-                                <span class="chip bg-color">dagger</span>
+                            <a href="/tags/rxjava/" target="_blank">
+                                <span class="chip bg-color">rxjava</span>
                             </a>
                         
                     </div>
@@ -403,21 +402,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-02-26
+                    2019-03-11
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        587
+                        162
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        1 分
                     </div>
                     
                 
@@ -433,120 +432,24 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Use-Dagger2-With-Kotlin"><a href="#Use-Dagger2-With-Kotlin" class="headerlink" title="Use Dagger2 With Kotlin"></a>Use Dagger2 With Kotlin</h2><h3 id="添加Dagger依赖"><a href="#添加Dagger依赖" class="headerlink" title="添加Dagger依赖"></a>添加Dagger依赖</h3><pre><code>dependencies {
-    kapt &#39;com.google.dagger:dagger-compiler:2.16&#39;
-    implementation &#39;com.google.dagger:dagger:2.16&#39;
-</code></pre><p>并且 要再文件的头部添加上apply</p>
-<pre><code>apply plugin: &#39;kotlin-kapt&#39;
-</code></pre><p>这样就会在<code>/app/build/generated/source/kapt/debug/com/zcy/mydagger</code>下生成对应的代码来实现注入<br><a id="more"></a></p>
-<h3 id="被注入对象"><a href="#被注入对象" class="headerlink" title="被注入对象"></a>被注入对象</h3><h4 id="手写代码"><a href="#手写代码" class="headerlink" title="手写代码"></a>手写代码</h4><pre><code>class Car @Inject constructor() {
-
-}
-</code></pre><h4 id="生成的代码"><a href="#生成的代码" class="headerlink" title="生成的代码"></a>生成的代码</h4><p>仔细阅读代码发现</p>
-<p>调用的顺序似乎是 <code>create(创建 INSTANCE )</code> -&gt; <code>get()</code> -&gt; <code>provideInstatnce()</code> -&gt; <code>new Car()</code></p>
-<p>来生产出一个 <strong>Car</strong> 对象</p>
-<pre><code>public final class Car_Factory implements Factory&lt;Car&gt; {
-  private static final Car_Factory INSTANCE = new Car_Factory();
-
-  @Override
-  public Car get() {
-    return provideInstance();
-  }
-
-  public static Car provideInstance() {
-    return new Car();
-  }
-
-  public static Car_Factory create() {
-    return INSTANCE;
-  }
-
-  public static Car newCar() {
-    return new Car();
-  }
-}
-</code></pre><h3 id="使用被注入的对象"><a href="#使用被注入的对象" class="headerlink" title="使用被注入的对象"></a>使用被注入的对象</h3><p>在kotlin中 需要注入到属性 set 中去</p>
-<pre><code>class Man {
-    lateinit var car:Car
-        @Inject set
-</code></pre><h3 id="Component-搭桥"><a href="#Component-搭桥" class="headerlink" title="Component 搭桥"></a>Component 搭桥</h3><h4 id="手写代码-1"><a href="#手写代码-1" class="headerlink" title="手写代码"></a>手写代码</h4><pre><code>@Component
-interface ManComponent {
-    fun inject(man: Man)
-}
-</code></pre><p>此时build之后会生成一些代码 比如<code>DaggerManComponent</code> 约定多了一个<code>Dagger</code>前缀</p>
-<h4 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h4><pre><code>public final class DaggerManComponent implements ManComponent {
-  private DaggerManComponent(Builder builder) {}
-
-  public static Builder builder() {
-    return new Builder();
-  }
-
-  public static ManComponent create() {
-    return new Builder().build();
-  }
-
-  @Override
-  public void inject(Man man) {
-    injectMan(man);
-  }
-
-  private Man injectMan(Man instance) {
-    Man_MembersInjector.injectSetCar(instance, new Car());
-    return instance;
-  }
-
-  public static final class Builder {
-    private Builder() {}
-
-    public ManComponent build() {
-      return new DaggerManComponent(this);
-    }
-  }
-}
-</code></pre><p>调用的顺序似乎是 <code>create()</code> -&gt; <code>inject(Man man)</code><br>其中<br><strong><code>create() == Builder().build()</code></strong><br>而在<code>build()</code>方法中返回了一个<strong>DaggerManComponent</strong>实例，通过这个实例，来调用<code>inject()</code><br>而 <code>inject()</code>里面调用的是<br><strong><code>Man_MembersInjector.injectSetCar(instance, new Car());</code></strong><br>最后返回<strong>instance</strong> 也就是传进来的<strong>Man</strong></p>
-<p>其他都没啥 ，关键是<strong><code>Man_MembersInjector.injectSetCar(instance, new Car());</code></strong><br>而这方法应该是Man(使用注入对象的Man所生成的代码)<br>猜测是将<code>new Car()</code>对象赋值到了<code>instance</code>中<br><strong>继续看下面</strong></p>
-<h3 id="完成注入"><a href="#完成注入" class="headerlink" title="完成注入"></a>完成注入</h3><h4 id="手写代码-2"><a href="#手写代码-2" class="headerlink" title="手写代码"></a>手写代码</h4><p>最后成功输出了<strong><code>com.zcy.mydagger.Car@6ff3c5b5</code></strong></p>
-<pre><code>class Man {
-    init {
-        DaggerManComponent.create().inject(this)
-    }
-
-    lateinit var car: Car
-        @Inject set
-
-    fun a() {
-        println(car)
-    }
-
-
-}
-
-fun main(args: Array&lt;String&gt;) {
-    println(Man().a())
-}
-</code></pre><h4 id="生成的代码-1"><a href="#生成的代码-1" class="headerlink" title="生成的代码"></a>生成的代码</h4><pre><code>public final class Man_MembersInjector implements MembersInjector&lt;Man&gt; {
-  private final Provider&lt;Car&gt; p0Provider;
-
-  public Man_MembersInjector(Provider&lt;Car&gt; p0Provider) {
-    this.p0Provider = p0Provider;
-  }
-
-  public static MembersInjector&lt;Man&gt; create(Provider&lt;Car&gt; p0Provider) {
-    return new Man_MembersInjector(p0Provider);
-  }
-
-  @Override
-  public void injectMembers(Man instance) {
-    injectSetCar(instance, p0Provider.get());
-  }
-
-  public static void injectSetCar(Man instance, Car p0) {
-    instance.setCar(p0);
-  }
-}
-
-</code></pre><p>此处正好证实了上面的猜想，<strong><code>injectSetCar</code></strong> 方法中 <code>instance.setCar(p0);</code>正好是将<strong>car</strong>这个属性进行赋值，恰好就是我们<strong>component</strong>中的<code>new car()</code></p>
-<p>简单的代码分析就酱</p>
+                <h1 id="RxJava-的一些奇技淫巧"><a href="#RxJava-的一些奇技淫巧" class="headerlink" title="RxJava 的一些奇技淫巧"></a>RxJava 的一些奇技淫巧</h1><h2 id="防止双击"><a href="#防止双击" class="headerlink" title="防止双击"></a>防止双击</h2><p>网上很多例子都是写RxBinding的防止抖动。但是我现在不想用它，那么如何去封装一个点击事件呢？</p>
+<p>分析： 我们每次点击View都发射一个onNext，然后运用操作符<strong>throttleFirst</strong>它的意思是在指定时间内只发射第一条事件，正好符合我们的需要。</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> View<span class="token punctuation">.</span><span class="token function">notDoubleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> Observable<span class="token operator">&lt;</span>View<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> emitter<span class="token operator">:</span> ObservableEmitter<span class="token operator">&lt;</span>View<span class="token operator">></span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">val</span> observable <span class="token operator">=</span> Observable<span class="token punctuation">.</span>create<span class="token operator">&lt;</span>View<span class="token operator">></span> <span class="token punctuation">{</span>
+        emitter <span class="token operator">=</span> it
+    <span class="token punctuation">}</span>
+    setOnClickListener <span class="token punctuation">{</span>
+        emitter<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> observable<span class="token punctuation">.</span><span class="token function">throttleFirst</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span>TimeUnit<span class="token punctuation">.</span>MILLISECONDS<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>当我们需要使得这个控件是防止双击的时候我们这样使用</p>
+<pre class=" language-kotlin"><code class="language-kotlin">titleText<span class="token punctuation">.</span><span class="token function">notDoubleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// do something</span>
+<span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">autoDispose</span><span class="token punctuation">(</span>activity<span class="token operator">!!</span><span class="token punctuation">)</span>
+</code></pre>
 
             </div>
             <hr>
@@ -570,7 +473,7 @@ fun main(args: Array&lt;String&gt;) {
                     </span>
                     <a href="https://o0o0oo00.github.io" class="b-link-green">Zhaocy</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/02/26/dagger/" class="b-link-green">Use Dagger2 With Kotlin</a>
+                    <a href="/2019/03/11/rxJava-extension/" class="b-link-green">RxJava 的一些奇技淫巧</a>
                 </p>
             </div>
         </div>
@@ -592,7 +495,7 @@ fun main(args: Array&lt;String&gt;) {
         repo: 'comment',
         owner: 'o0o0oo00',
         admin: "o0o0oo00",
-        id: '2019-02-26T13-52-21',
+        id: '2019-03-11T14-16-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -615,31 +518,45 @@ fun main(args: Array&lt;String&gt;) {
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/02/27/Kodein /">
+                <a href="/2019/03/11/rxJava-extension/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt>
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="RxJava 的一些奇技淫巧">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">RxJava 的一些奇技淫巧</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Kodeindependencycompile &#39;org.kodein.di:kodein-di-generic-jvm:5.2.0&#39;
-compile &#39;org.kodein.di:kodein-di-framewo</div>
+                    <div class="summary">RxJava 的一些奇技淫巧防止双击网上很多例子都是写RxBinding的防止抖动。但是我现在不想用它，那么如何去封装一个点击事件呢？
+分析： 我们每次点击View都发射一个onNext，然后运用操作符throttleFirst它的意思是在</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-11
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Zhaocy
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                    技术
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/rxjava/" target="_blank">
+                        <span class="chip bg-color">rxjava</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -651,28 +568,42 @@ compile &#39;org.kodein.di:kodein-di-framewo</div>
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/20/English/">
+                <a href="/2019/03/09/rxjava-eventbus/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt>
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="两种方式写一个EventBus或者叫EventDidi">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">两种方式写一个EventBus或者叫EventDidi</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">用RxJava写一个EventBus骚话不说。现在我们用RxJava来优雅的实现它。RxJava我们都知道，观察者模式！
+EventBus，直接翻译为事件的公交车，我们现在写一个事件的专车。
+首先写一个用于观察的ObservableMap作</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-09
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Zhaocy
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/技术/" class="post-category" target="_blank">
+                                    技术
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/rxjava/" target="_blank">
+                        <span class="chip bg-color">rxjava</span>
+                    </a>
+                    
                 </div>
                 
             </div>
