@@ -5,7 +5,11 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Observable, Zhaocy">
-    <meta name="description" content="Observable | Zhaocy">
+    <meta name="description" content="ObservableCreate
+它是Observable的子类
+将create中传入的参数传给ObservableCreate
+subscribeActual
+传入的参数与：source 实现了ObservableOnSubscribe接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -395,7 +399,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        90
                     </div>
                     
 
@@ -418,7 +422,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h3 id="ObservableCreate"><a href="#ObservableCreate" class="headerlink" title="ObservableCreate"></a>ObservableCreate</h3><ul>
+<li>它是Observable的子类</li>
+<li>将create中传入的参数传给ObservableCreate</li>
+<li>subscribeActual</li>
+<li>传入的参数与：source 实现了ObservableOnSubscribe接口，并在接口的subscribe方法中，传入了数据源，这些数据源需要通过ObservableEmitter进行发射</li>
+</ul>
+<h3 id="Observable-subscribe"><a href="#Observable-subscribe" class="headerlink" title="Observable.subscribe()"></a>Observable.subscribe()</h3><ul>
+<li>Observable.subscribe(observer)实际上就是调用Observable.subscribeActual(observer)方法</li>
+<li>ObservableEmitter： 数据源发射器，内部存储了observer</li>
+<li></li>
+</ul>
+
             </div>
             <hr>
 
@@ -646,7 +661,7 @@ EventBus，直接翻译为事件的公交车，我们现在写一个事件的专
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.4k</span>
+                <span class="white-color">25.7k</span>
             
 
             

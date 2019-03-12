@@ -409,7 +409,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        162
+                        317
                     </div>
                     
 
@@ -450,6 +450,20 @@
 <span class="token comment" spellcheck="true">// do something</span>
 <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">autoDispose</span><span class="token punctuation">(</span>activity<span class="token operator">!!</span><span class="token punctuation">)</span>
 </code></pre>
+<h2 id="请求Loading"><a href="#请求Loading" class="headerlink" title="请求Loading"></a>请求Loading</h2><p>我们想要在请求开始的时候加一个Loading，结束的时候将Loading取消掉</p>
+<p>包括onComplete、onError、dispose</p>
+<p>经查阅得知在这三个之后都回调用doFinally()，索性我们就写一个扩展方法</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> Observable<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">.</span><span class="token function">loading</span><span class="token punctuation">(</span>activity<span class="token operator">:</span> AppBaseActivity<span class="token punctuation">,</span> cancel<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">:</span> Observable<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> wake <span class="token operator">=</span> <span class="token function">WeakReference</span><span class="token punctuation">(</span>activity<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> doOnSubscribe <span class="token punctuation">{</span>
+        wake<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">loading</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> cancel<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">doFinally</span> <span class="token punctuation">{</span>
+        wake<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">loading</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> cancel<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>我们的Response数据也会随着扩展方法一并返回去了，而且扩展方法，不同于使用操作符会产生额外的Observable对象。</p>
+<p>使用的话直接加到我们调用链里面，非常完美！</p>
 
             </div>
             <hr>
@@ -675,7 +689,7 @@ EventBus，直接翻译为事件的公交车，我们现在写一个事件的专
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.4k</span>
+                <span class="white-color">25.7k</span>
             
 
             
