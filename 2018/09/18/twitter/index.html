@@ -639,8 +639,9 @@ android:exported=&quot;false&quot;&gt;
                 </a>
                 <div class="card-content article-content">
                     <div class="summary">从上到下更新，遇到啥记啥。
-companion的几个注解@JvmField指示Kotlin编译器不为该属性生成getter/setter，并将其作为字段公开，如果用来修饰val变量，就和const关键字的功能一样了
-@JvmOverload</div>
+const 与valval 只是没有setter方法而已，仍然可以在getter方法中去根据一个其他变量来动态获取值。
+但是const 又称为编译时常量，即，编译的时候其值就必须确定下来，否则编译不过去。
+com</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-09-17

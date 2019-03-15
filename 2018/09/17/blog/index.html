@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Meet Kotlin, Zhaocy">
     <meta name="description" content="从上到下更新，遇到啥记啥。
-companion的几个注解@JvmField指示Kotlin编译器不为该属性生成getter/setter，并将其作为字段公开，如果用来修饰val变量，就和const关键字的功能一样了
-@JvmOverload">
+const 与valval 只是没有setter方法而已，仍然可以在getter方法中去根据一个其他变量来动态获取值。
+但是const 又称为编译时常量，即，编译的时候其值就必须确定下来，否则编译不过去。
+com">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -410,7 +411,7 @@ companion的几个注解@JvmField指示Kotlin编译器不为该属性生成gette
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.4k
+                        2.5k
                     </div>
                     
 
@@ -434,6 +435,8 @@ companion的几个注解@JvmField指示Kotlin编译器不为该属性生成gette
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>从上到下更新，遇到啥记啥。</p>
+<h2 id="const-与val"><a href="#const-与val" class="headerlink" title="const 与val"></a>const 与val</h2><p>val 只是没有setter方法而已，仍然可以在getter方法中去根据一个其他变量来动态获取值。</p>
+<p>但是const 又称为编译时常量，即，编译的时候其值就必须确定下来，否则编译不过去。</p>
 <h2 id="companion的几个注解"><a href="#companion的几个注解" class="headerlink" title="companion的几个注解"></a>companion的几个注解</h2><h3 id="JvmField"><a href="#JvmField" class="headerlink" title="@JvmField"></a>@JvmField</h3><p><strong>指示Kotlin编译器不为该属性生成getter/setter，并将其作为字段公开</strong>，<strong>如果用来修饰val变量，就和const关键字的功能一样了</strong></p>
 <h3 id="JvmOverloads"><a href="#JvmOverloads" class="headerlink" title="@JvmOverloads"></a>@JvmOverloads</h3><p><strong>指示Kotlin编译器为包含默认参数值的函数生成重载。</strong></p>
 <h3 id="JvmStatic"><a href="#JvmStatic" class="headerlink" title="@JvmStatic"></a>@JvmStatic</h3><p><strong>指定从该元素暴露为静态方法需要。注意：此注解只能用于被object关键字修饰的类的方法，或者companion object中的方法</strong></p>
