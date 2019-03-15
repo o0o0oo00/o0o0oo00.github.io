@@ -5,15 +5,9 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Meet Kotlin, Zhaocy">
-    <meta name="description" content="Kotlin的几个特性扩展函数尾随闭包当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。
-标准函数
-with
-apply
-run
-let
-
-data class参数中可定义成员变量、可选参数、命名参数等
-apply plugi">
+    <meta name="description" content="从上到下更新，遇到啥记啥。
+companion的几个注解@JvmField指示Kotlin编译器不为该属性生成getter/setter，并将其作为字段公开，如果用来修饰val变量，就和const关键字的功能一样了
+@JvmOverload">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -416,14 +410,14 @@ apply plugi">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.2k
+                        2.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        9 分
                     </div>
                     
                 
@@ -439,7 +433,14 @@ apply plugi">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Kotlin的几个特性"><a href="#Kotlin的几个特性" class="headerlink" title="Kotlin的几个特性"></a>Kotlin的几个特性</h3><h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><h4 id="尾随闭包"><a href="#尾随闭包" class="headerlink" title="尾随闭包"></a>尾随闭包</h4><p>当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。</p>
+                <p>从上到下更新，遇到啥记啥。</p>
+<h2 id="companion的几个注解"><a href="#companion的几个注解" class="headerlink" title="companion的几个注解"></a>companion的几个注解</h2><h3 id="JvmField"><a href="#JvmField" class="headerlink" title="@JvmField"></a>@JvmField</h3><p><strong>指示Kotlin编译器不为该属性生成getter/setter，并将其作为字段公开</strong>，<strong>如果用来修饰val变量，就和const关键字的功能一样了</strong></p>
+<h3 id="JvmOverloads"><a href="#JvmOverloads" class="headerlink" title="@JvmOverloads"></a>@JvmOverloads</h3><p><strong>指示Kotlin编译器为包含默认参数值的函数生成重载。</strong></p>
+<h3 id="JvmStatic"><a href="#JvmStatic" class="headerlink" title="@JvmStatic"></a>@JvmStatic</h3><p><strong>指定从该元素暴露为静态方法需要。注意：此注解只能用于被object关键字修饰的类的方法，或者companion object中的方法</strong></p>
+<p>指定了之后就变成了静态方法，而不是伴生对象中的静态方法，调用起来不会是<code>TestStatic.Companion.fun()</code>而是<code>TestStatic.fun()</code></p>
+<h3 id="JvmSynthetic"><a href="#JvmSynthetic" class="headerlink" title="@JvmSynthetic"></a>@JvmSynthetic</h3><p><strong>用来注解方法和字段，使得被标记的元素只能在kotlin代码中使用，在java代码中无法使用。</strong></p>
+<h3 id="JvmSuppressWildcards"><a href="#JvmSuppressWildcards" class="headerlink" title="@JvmSuppressWildcards"></a>@JvmSuppressWildcards</h3><p><strong>用来注解类和方法，使得被标记元素的泛型参数不会被编译成通配符?</strong></p>
+<h3 id="Kotlin的几个特性"><a href="#Kotlin的几个特性" class="headerlink" title="Kotlin的几个特性"></a>Kotlin的几个特性</h3><h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><h4 id="尾随闭包"><a href="#尾随闭包" class="headerlink" title="尾随闭包"></a>尾随闭包</h4><p>当最后一个参数是一个方法或者闭包，可以把方法和闭包提到括号外面。</p>
 <h4 id="标准函数"><a href="#标准函数" class="headerlink" title="标准函数"></a>标准函数</h4><ul>
 <li>with</li>
 <li>apply</li>
@@ -820,7 +821,7 @@ Welcome to Hexo! This is your very first post. Check documentation for more info
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.7k</span>
+                <span class="white-color">25.9k</span>
             
 
             
