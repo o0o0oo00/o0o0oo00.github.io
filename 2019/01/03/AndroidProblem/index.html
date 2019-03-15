@@ -5,8 +5,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Android疑难问题总结, Zhaocy">
-    <meta name="description" content="Android疑难问题总结
-使用WindowManager的时候 我们在removeView(view)的时候 会事先判断view.isAttachedToWindow  而我遇到的问题是，我再removeView(view)之后再去判断v">
+    <meta name="description" content="Android疑难问题总结使用WindowManager的时候 我们在removeView(view)的时候 会事先判断view.isAttachedToWindow  而我遇到的问题是，我再removeView(view)之后再去判断vi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,7 +408,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        185
+                        218
                     </div>
                     
 
@@ -432,12 +431,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Android疑难问题总结"><a href="#Android疑难问题总结" class="headerlink" title="Android疑难问题总结"></a>Android疑难问题总结</h3><hr>
-<p>使用WindowManager的时候 我们在<code>removeView(view)</code>的时候 会事先判断<code>view.isAttachedToWindow</code>  而我遇到的问题是，我再<code>removeView(view)</code>之后再去判断<code>view.isAttachedToWindow</code> 其值仍然为<strong>true</strong> ,这就令我很是费解。  </p>
+                <h2 id="Android疑难问题总结"><a href="#Android疑难问题总结" class="headerlink" title="Android疑难问题总结"></a>Android疑难问题总结</h2><p>使用WindowManager的时候 我们在<code>removeView(view)</code>的时候 会事先判断<code>view.isAttachedToWindow</code>  而我遇到的问题是，我再<code>removeView(view)</code>之后再去判断<code>view.isAttachedToWindow</code> 其值仍然为<strong>true</strong> ,这就令我很是费解。  </p>
 <h5 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h5><p><code>windowManager.removeViewImmediate(view)</code>之后我们再去判断<code>view.isAttachedToWindow</code> 其值就变成了<strong>false</strong></p>
 <hr>
 <a id="more"></a>
-<h3 id="一个topActivity解决了多少问题"><a href="#一个topActivity解决了多少问题" class="headerlink" title="一个topActivity解决了多少问题"></a>一个topActivity解决了多少问题</h3><p>很多时候再很多的情况下我们想要去操作我们的 <strong>输入法显示或者隐藏</strong><br>但是有时在<code>fragment</code> 或者 <code>dialog</code> 等情况下，普通的形式根本不生效。<br>这里我的处理方式是，在任情况下，都去调用<code>topActivity.hideSoft()</code>方法。<br>而不是去<code>dialog.hideSoft()</code> 或者 <code>fragment.hideSoft()</code></p>
+<h2 id="一个topActivity解决了多少问题"><a href="#一个topActivity解决了多少问题" class="headerlink" title="一个topActivity解决了多少问题"></a>一个topActivity解决了多少问题</h2><p>很多时候再很多的情况下我们想要去操作我们的 <strong>输入法显示或者隐藏</strong><br>但是有时在<code>fragment</code> 或者 <code>dialog</code> 等情况下，普通的形式根本不生效。<br>这里我的处理方式是，在任情况下，都去调用<code>topActivity.hideSoft()</code>方法。<br>而不是去<code>dialog.hideSoft()</code> 或者 <code>fragment.hideSoft()</code></p>
+<h2 id="git-pull-仓库-refusing-to-merge-unrelated-histories"><a href="#git-pull-仓库-refusing-to-merge-unrelated-histories" class="headerlink" title="git pull 仓库 refusing to merge unrelated histories"></a>git pull 仓库 refusing to merge unrelated histories</h2><p>远程仓库与本地仓库存在不相关联的历史</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> pull origin master --allow-unrelated-historie
+</code></pre>
 <p>持续更新…</p>
 
             </div>
@@ -660,7 +661,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.9k</span>
+                <span class="white-color">26k</span>
             
 
             
