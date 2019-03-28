@@ -382,6 +382,10 @@
                                 <span class="chip bg-color">rxjava</span>
                             </a>
                         
+                            <a href="/tags/kotlin/" target="_blank">
+                                <span class="chip bg-color">kotlin</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -409,14 +413,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        317
+                        639
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -464,6 +468,60 @@
 </code></pre>
 <p>我们的Response数据也会随着扩展方法一并返回去了，而且扩展方法，不同于使用操作符会产生额外的Observable对象。</p>
 <p>使用的话直接加到我们调用链里面，非常完美！</p>
+<h2 id="输入框搜索优化"><a href="#输入框搜索优化" class="headerlink" title="输入框搜索优化"></a>输入框搜索优化</h2><p>使用搜索输入框的时候，如果不做任何操作，用户每次键入内容都会触发联想搜索接口，导致请求次数过多。</p>
+<p>我们需要在用户停止键入内容一段时间（400ms）后再去请求接口，如果用户一直输入，我们就等用户输入完再去请求接口。</p>
+<p>首先将<code>TextWatcher</code>包装成<strong>Observable</strong>，并且做一些注册与反注册操作。</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token comment" spellcheck="true">// EditText输入监听包装成Observable</span>
+<span class="token keyword">fun</span> EditText<span class="token punctuation">.</span><span class="token function">getTextChangedObservable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Observable<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> emitter<span class="token operator">:</span> ObservableEmitter<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">val</span> observable <span class="token operator">=</span> Observable<span class="token punctuation">.</span>create<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span>
+        emitter <span class="token operator">=</span> it
+    <span class="token punctuation">}</span>
+    <span class="token keyword">val</span> textWatcher <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> TextWatcher <span class="token punctuation">{</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">afterTextChanged</span><span class="token punctuation">(</span>s<span class="token operator">:</span> Editable<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            s<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">also</span> <span class="token punctuation">{</span>
+                emitter<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">beforeTextChanged</span><span class="token punctuation">(</span>s<span class="token operator">:</span> CharSequence<span class="token operator">?</span><span class="token punctuation">,</span> start<span class="token operator">:</span> Int<span class="token punctuation">,</span> count<span class="token operator">:</span> Int<span class="token punctuation">,</span> after<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onTextChanged</span><span class="token punctuation">(</span>s<span class="token operator">:</span> CharSequence<span class="token operator">?</span><span class="token punctuation">,</span> start<span class="token operator">:</span> Int<span class="token punctuation">,</span> before<span class="token operator">:</span> Int<span class="token punctuation">,</span> count<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">val</span> actionListener <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> TextView<span class="token punctuation">.</span><span class="token function">OnEditorActionListener</span> <span class="token punctuation">{</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onEditorAction</span><span class="token punctuation">(</span>v<span class="token operator">:</span> TextView<span class="token operator">?</span><span class="token punctuation">,</span> actionId<span class="token operator">:</span> Int<span class="token punctuation">,</span> event<span class="token operator">:</span> KeyEvent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>actionId <span class="token operator">==</span> EditorInfo<span class="token punctuation">.</span>IME_ACTION_SEARCH<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                v<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">hideSoft</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">this</span><span class="token label symbol">@getTextChangedObservable</span><span class="token punctuation">.</span><span class="token function">clearFocus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                emitter<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@getTextChangedObservable</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token boolean">true</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token boolean">false</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addTextChangedListener</span><span class="token punctuation">(</span>textWatcher<span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setOnEditorActionListener</span><span class="token punctuation">(</span>actionListener<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> observable<span class="token punctuation">.</span><span class="token function">doFinally</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token label symbol">@getTextChangedObservable</span><span class="token punctuation">.</span><span class="token function">removeTextChangedListener</span><span class="token punctuation">(</span>textWatcher<span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token label symbol">@getTextChangedObservable</span><span class="token punctuation">.</span><span class="token function">setOnEditorActionListener</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>然后再将<strong>Observable</strong>做控制”发射时机”操作。</p>
+<pre class=" language-kotlin"><code class="language-kotlin"><span class="token comment" spellcheck="true">// 搜索框优化，减少请求次数</span>
+<span class="token keyword">fun</span> EditText<span class="token punctuation">.</span><span class="token function">searchTextWatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Observable<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTextChangedObservable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">debounce</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>MILLISECONDS<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 两次发射数据间隔小于指定时间，就会丢弃前一次数据，直到指定时间内没有新数据时，才会发射最后一次数据</span>
+        <span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>AndroidSchedulers<span class="token punctuation">.</span><span class="token function">mainThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
 
             </div>
             <hr>
@@ -569,6 +627,10 @@
                     
                     <a href="/tags/rxjava/" target="_blank">
                         <span class="chip bg-color">rxjava</span>
+                    </a>
+                    
+                    <a href="/tags/kotlin/" target="_blank">
+                        <span class="chip bg-color">kotlin</span>
                     </a>
                     
                 </div>
@@ -689,7 +751,7 @@ EventBus，直接翻译为事件的公交车，我们现在写一个事件的专
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">26k</span>
+                <span class="white-color">26.3k</span>
             
 
             
